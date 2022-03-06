@@ -1,0 +1,108 @@
+$primaryClr : rgb(92, 97, 248);
+.productInfo{
+display: flex;
+width: 100%;
+text-align: center;
+    .product{
+        width: 100%;
+        h2{
+            color: green;
+        }
+        img{
+            width: 25%;
+            margin: auto;
+        }
+    }
+    
+}
+.comments{
+    display: flex;
+    text-align: center;
+    flex-direction: column;
+    .inputButton{
+        button{
+            margin: auto;
+            border: none;
+            width: 250px;
+            padding: 20px;
+            cursor: pointer;
+            background-color: $primaryClr;
+            color: white;
+            border-top-right-radius: 12px;
+            border-bottom-right-radius: 12px;
+            font-size: larger;
+            margin-bottom: 20px;
+
+            display: inline-block;
+            padding: 10px 15px;
+            font-size: 20px;
+            -webkit-appearance: none;
+            border: 2px solid transparent;
+        }
+        input{
+            padding: 20px;
+            width: 50%;
+            border-bottom-left-radius: 12px;
+            border-top-left-radius: 12px;
+
+            display: inline-block;
+            padding: 10px 15px;
+            font-size: 20px;
+            -webkit-appearance: none;
+            border: 2px solid rgb(84, 84, 84);
+            border-right: none;
+
+        }
+    }  
+    
+    button:hover{
+        color: rgb(192, 192, 192);
+        transition: all ease-in-out 150ms;
+    }
+    .commentPanel{
+        width: 100%;
+        min-height: 700px;
+        background-color: rgb(255, 255, 255);
+        .generatedComments{
+            display: flex;
+            flex-direction: column;
+            text-align: left;
+            margin: 30px;
+            img{
+                width: 70px;
+                height: 70px;
+                border-radius: 200px;
+            }
+            p{
+                background-color: rgb(197, 197, 197);
+                padding: 20px;
+                border-radius: 15px;
+            }
+            .flex{
+                display: flex;
+                h2{
+                    padding: 0;
+                    margin-left: 10px;
+                }
+                h4{
+                    margin-left: 50px;
+                }
+            }
+        }
+    }
+}
+@media only screen and (max-width: 700px) {
+    .comments{
+        .inputButton {
+            flex-direction: row !important;
+            button{
+                border-radius: 0 0 10px 10px !important;
+            }
+            input{
+                width: 80%;
+                border-radius: 10px !important;
+                border: 2px solid rgb(84, 84, 84) !important;
+            }
+        }
+    }
+}

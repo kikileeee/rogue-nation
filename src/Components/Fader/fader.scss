@@ -1,0 +1,33 @@
+.popup{
+    position:fixed ;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: -1;
+    color: white;
+    font-weight: 500;
+    font-size: larger;
+    background-color: rgba(46, 139, 86, 0);
+    padding: 20px;
+    pointer-events: none;
+    border-radius: 10px;
+    animation: white-green 2.5s ease-in;
+    @keyframes white-green {
+        0%{
+            z-index: 5;
+        }
+        10%{
+            background-color: rgba(46, 139, 86, 0.9);
+        }
+        80%{
+            background-color: rgba(46, 139, 86, 0.9);
+        }
+        99%{
+            background-color: rgba(46, 139, 86, 0);
+            z-index: 5;
+        }
+        100%{
+            z-index: -1;
+        }
+    } 
+}

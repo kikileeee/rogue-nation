@@ -1,0 +1,116 @@
+.navBar{
+    background-color: rgb(92, 97, 248);
+    margin: 0;
+    color: white;
+    position: fixed;
+    width: 100%;
+    z-index: 15;
+    top: 0;
+    ul{
+        display: flex;
+        justify-content: space-between;
+    }
+    li{
+        font-size: x-large;
+        font-weight: 500;
+        list-style-type: none;
+        width: auto;
+        cursor: pointer;
+        padding: 20px;
+        position: relative;
+    }
+    a:hover{
+        color: rgb(201, 201, 201);
+        transition: ease-in-out 200ms;
+    }
+    .firstNav{
+        display: flex;
+        justify-content: flex-start;
+    }
+    .secondNav{
+        display: flex;
+        justify-content: space-between;
+        .dropdown {
+            float: left;
+            overflow: hidden;
+          
+            .dropbtn {
+              outline: none;
+              color: white;
+              background-color: inherit;
+              font-family: inherit;
+              margin: 0;
+            }
+          }
+          
+          .dropdown-content {
+            display: none;
+            position: absolute;
+            right: 0;
+            background-color: #f9f9f9;
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+            z-index: 1;
+          
+            a {
+                
+              font-size: 16px;
+              float: none;
+              color: black;
+              padding: 12px 16px;
+              text-decoration: none;
+              display: block;
+              text-align: left;
+          
+              &:hover {
+                background-color: #ddd;
+              }
+            }
+          }
+          
+          .dropdown:hover .dropdown-content {
+            display: block;
+          }
+    }
+    a {
+        color: white;
+        text-decoration: none;
+    }
+    svg{
+        width: 50px;
+        height: 50px;
+        margin-top: -10px;
+    }
+    .numberCart::after{
+        content: attr(data-after);
+        text-align: center;
+        display: block;
+        position: absolute;
+        background-color: orange;
+        width: 32px;
+        height: 32px;
+        z-index: 10;
+        border-radius: 5px;
+        top: 0;
+        right: 10px;
+    }
+}
+.navBarGap{
+    margin-top: 18vh;
+}
+@media only screen and (max-width: 700px) {
+    .navBar{
+        ul{
+            padding: 0;
+            .secondNav{
+                padding-right: 10px;
+            }
+            div{
+                li{
+                    font-size: medium;
+                }
+            }
+        }
+        
+    }
+  }
