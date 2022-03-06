@@ -1,8 +1,10 @@
 
           /////     Im still working on this site    //////
 
-Page is currently active on this link : https://my-app-ap8sshldz-kikileeee.vercel.app/
+Page is currently active on this link : https://my-app-ap8sshldz-kikileeee.vercel.app/   // OLD version, not updated to the newest one
 (If database does not load products on the first time loading the site, wait a few second and then reload)
+
+// Mirgated repo from https://github.com/kikileeee/react-shop
 
 Currently working on a React project.
 
