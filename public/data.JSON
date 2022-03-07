@@ -1,0 +1,67 @@
+{
+    "lists": [
+        {
+            "checkboxName": "Gender",
+            "check": [
+                {
+                    "type": "men",
+                    "text": "For men"
+                },
+                {
+                    "type": "women",
+                    "text": "For women"
+                },
+                {
+                    "type": "kids",
+                    "text": "For kids"
+                },
+                {
+                    "type": "unisex",
+                    "text": "Unisex"
+                }
+            ]
+        },
+        {
+            "checkboxName": "Price",
+            "check": [
+                {
+                    "type": "price1",
+                    "text": "100$ or below"
+                },
+                {
+                    "type": "price2",
+                    "text": "100$ to 150$"
+                },
+                {
+                    "type": "price3",
+                    "text": "150$ to 200$"
+                },
+                {
+                    "type": "price4",
+                    "text": "100$ or higher"
+                }
+            ]
+        },
+        {
+            "checkboxName": "Brand",
+            "check": [
+                {
+                    "type": "brand1",
+                    "text": "Nike"
+                },
+                {
+                    "type": "brand2",
+                    "text": "Adidas"
+                },
+                {
+                    "type": "brand3",
+                    "text": "Puma"
+                },
+                {
+                    "type": "brand4",
+                    "text": "Hummel"
+                }
+            ]
+        }
+    ]
+}

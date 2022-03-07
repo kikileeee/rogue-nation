@@ -2,38 +2,38 @@ $primaryClr : rgb(92, 97, 248);
 
 .products{
     display: flex;
-    flex-direction: column;
-    .textField{
-        text-align: center;
-        width: 60%;
-        margin: auto;
-        margin-bottom: 40px;
-        display: flex;
-        gap: 200px;
-
-        .forWho{
+    flex-direction: row;
+    .filterSearch{
+        padding: 30px;
+        .textField{
+            margin-top: 20px;
+            width: 100%;
+            margin-bottom: 40px;
             display: flex;
-            flex-direction: column;
-        }
+            gap: 200px;
+
+            .forWho{
+                padding: 10px;
+                width: 100%;
+                display: flex;
+                flex-direction: column;
+                color: rgb(67, 67, 67);
+                span{
+                    margin-top: 20px;
+                    border-bottom: 1px solid gray;
+                    padding-bottom: 7px;
+                    input, label{
+                        cursor: pointer;
+                    }
+                    div{
+                        margin-bottom: 5px;
+                    }
+                }
+            }
 
 
     }
-    .search{
-        text-align: center;
-        padding: 10px;
-        svg{
-            background-color: rgb(216, 216, 216);
-            width: auto;
-            height: 40px;
-
-        }
-        input{
-            width: 300px;
-            height: 40px;
-            font-size: larger;
-        }
-        
-    }
+}
     .productsPanel{
         display: flex;
         flex-wrap: wrap;
