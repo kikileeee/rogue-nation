@@ -16,7 +16,6 @@ const Products = (props) => {
     const [Search, setSearch] = useState('')
     const [sFader, setsFader] = useState()
     const [Check, setCheck] = useState([])
-    let productArray = []
     const [productArrayState, setProductArrayState] = useState()
     const [checkedState, setCheckedState] = useState(
         new Array(12).fill(false)
@@ -93,52 +92,96 @@ const Products = (props) => {
         }
     }
     function mappingProducts() {
-        Products.map(product => {
+        let productArray = new Array(...Products)
+        let genderArray = []
+        let brandArray = []
+        let priceArray = []
+
+        let genderBooleanArr = [checkedState[0], checkedState[1], checkedState[2], checkedState[3]]
+        let priceBooleanArr = [checkedState[4], checkedState[5], checkedState[6], checkedState[7]]
+        let brandBooleanArr = [checkedState[8], checkedState[9], checkedState[10], checkedState[11]]
+        Products.map((product, index) => {
             if (checkedState[0] && product.gender == 'men') {
-                productArray.push(product)
+                genderArray.push(product)
             }
             if (checkedState[1] && product.gender == 'women') {
-                productArray.push(product)
+                genderArray.push(product)
             }
             if (checkedState[2] && product.gender == 'kids') {
-                productArray.push(product)
+                genderArray.push(product)
             }
             if (checkedState[3] && product.gender == 'unisex') {
-                productArray.push(product)
-            }
-            if (checkedState[4] && product.productPrice < 100) {
-                productArray.push(product)
-            }
-            if (checkedState[5] && (product.productPrice > 100 && product.productPrice < 150)) {
-                productArray.push(product)
-            }
-            if (checkedState[6] && (product.productPrice > 150 && product.productPrice < 200)) {
-                productArray.push(product)
-            }
-            if (checkedState[7] && product.productPrice > 200) {
-                productArray.push(product)
+                genderArray.push(product)
             }
             if (checkedState[8] && product.brand == 'nike') {
-                productArray.push(product)
+                brandArray.push(product)
             }
             if (checkedState[9] && product.brand == 'adidas') {
-                productArray.push(product)
+                brandArray.push(product)
             }
             if (checkedState[10] && product.brand == 'puma') {
-                productArray.push(product)
+                brandArray.push(product)
             }
-            if (checkedState[10] && product.brand == 'hummel') {
-                productArray.push(product)
+            if (checkedState[11] && product.brand == 'hummel') {
+                brandArray.push(product)
+            }
+            if (checkedState[4] && product.productPrice < 100) {
+                priceArray.push(product)
+            }
+            if (checkedState[5] && (product.productPrice > 100 && product.productPrice < 150)) {
+                priceArray.push(product)
+            }
+            if (checkedState[6] && (product.productPrice > 150 && product.productPrice < 200)) {
+                priceArray.push(product)
+            }
+            if (checkedState[7] && product.productPrice > 200) {
+                priceArray.push(product)
             }
 
         })
-        let filteredProductArray = [...new Set(productArray)]
-        if (productArray.length == 0) {
+        let filteredGender = productArray.filter(x => genderArray.includes(x))
+        let filteredPrice = productArray.filter(x => priceArray.includes(x))
+        let filteredBrand = productArray.filter(x => brandArray.includes(x))
+
+        let diffrencex = filteredGender.filter(x => filteredPrice.includes(x))
+        let diffrencey = filteredBrand.filter(x => filteredPrice.includes(x))
+        let diffrencez = filteredBrand.filter(x => filteredGender.includes(x))
+
+        let diffrence = diffrencey.filter(x => filteredGender.includes(x))
+        function isTrue(x) {
+            if (x.some(e => e === true)){
+                return true
+            } else {
+                return false
+            }
+        }
+
+        if (checkedState.every(e => e === false)) {
             return Products
+        }     
+        
+        else if (isTrue(genderBooleanArr) && isTrue(priceBooleanArr) && isTrue(brandBooleanArr)){
+            return diffrence;
         }
-        else {
-            return filteredProductArray;
+        else if (isTrue(genderBooleanArr) && isTrue(priceBooleanArr)) {
+            return diffrencex
         }
+        else if (isTrue(brandBooleanArr) && isTrue(priceBooleanArr)) {
+            return diffrencey
+        }
+        else if (isTrue(genderBooleanArr) && isTrue(brandBooleanArr)) {
+            return diffrencez
+        }
+        else if (isTrue(brandBooleanArr)) {
+            return filteredBrand
+        }
+        else if (isTrue(priceBooleanArr)) {
+            return filteredPrice
+        }
+        else if (isTrue(genderBooleanArr)) {
+            return filteredGender
+        }
+
     }
     return (
         <>
