@@ -16,20 +16,20 @@ const Products = (props) => {
     const [Search, setSearch] = useState('')
     const [sFader, setsFader] = useState()
     const [Check, setCheck] = useState([])
-    const [productArrayState, setProductArrayState] = useState()
     const [checkedState, setCheckedState] = useState(
         new Array(12).fill(false)
     );
     const navigate = useNavigate()
 
     let count = -1
+
     const port = process.env.PORT || '9000'
     const ip = process.env.REACT_APP_IP || 'http://192.168.1.113:9000/'
 
 
     function handleOnChange(index) {
         let newArr = [...checkedState]
-        if (newArr[index] == true) {
+        if (newArr[index] === true) {
             newArr[index] = false
         }
         else {
@@ -101,28 +101,28 @@ const Products = (props) => {
         let priceBooleanArr = [checkedState[4], checkedState[5], checkedState[6], checkedState[7]]
         let brandBooleanArr = [checkedState[8], checkedState[9], checkedState[10], checkedState[11]]
         Products.map((product, index) => {
-            if (checkedState[0] && product.gender == 'men') {
+            if (checkedState[0] && product.gender === 'men') {
                 genderArray.push(product)
             }
-            if (checkedState[1] && product.gender == 'women') {
+            if (checkedState[1] && product.gender === 'women') {
                 genderArray.push(product)
             }
-            if (checkedState[2] && product.gender == 'kids') {
+            if (checkedState[2] && product.gender === 'kids') {
                 genderArray.push(product)
             }
-            if (checkedState[3] && product.gender == 'unisex') {
+            if (checkedState[3] && product.gender === 'unisex') {
                 genderArray.push(product)
             }
-            if (checkedState[8] && product.brand == 'nike') {
+            if (checkedState[8] && product.brand === 'nike') {
                 brandArray.push(product)
             }
-            if (checkedState[9] && product.brand == 'adidas') {
+            if (checkedState[9] && product.brand === 'adidas') {
                 brandArray.push(product)
             }
-            if (checkedState[10] && product.brand == 'puma') {
+            if (checkedState[10] && product.brand === 'puma') {
                 brandArray.push(product)
             }
-            if (checkedState[11] && product.brand == 'hummel') {
+            if (checkedState[11] && product.brand === 'hummel') {
                 brandArray.push(product)
             }
             if (checkedState[4] && product.productPrice < 100) {
@@ -149,7 +149,7 @@ const Products = (props) => {
 
         let diffrence = diffrencey.filter(x => filteredGender.includes(x))
         function isTrue(x) {
-            if (x.some(e => e === true)){
+            if (x.some(e => e === true)) {
                 return true
             } else {
                 return false
@@ -158,9 +158,9 @@ const Products = (props) => {
 
         if (checkedState.every(e => e === false)) {
             return Products
-        }     
-        
-        else if (isTrue(genderBooleanArr) && isTrue(priceBooleanArr) && isTrue(brandBooleanArr)){
+        }
+
+        else if (isTrue(genderBooleanArr) && isTrue(priceBooleanArr) && isTrue(brandBooleanArr)) {
             return diffrence;
         }
         else if (isTrue(genderBooleanArr) && isTrue(priceBooleanArr)) {
@@ -205,8 +205,8 @@ const Products = (props) => {
                             }}
                         />
                         <div className='textField'>
+                            <h3>Filters</h3>
                             <div className='forWho'>
-                                <h3>Filters</h3>
                                 {Check.map(item => {
                                     return <span key={uuidv4()}><h4>{item.checkboxName}</h4>
                                         {item.check.map(e => {

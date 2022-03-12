@@ -2,23 +2,33 @@ $primaryClr : rgb(92, 97, 248);
 
 .products{
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     .filterSearch{
-        padding: 30px;
+        padding: 5px;
+        div:first-child{
+            width: 100%;
+        }
         .textField{
+            h3{
+                text-align: center;
+                margin-bottom: 0;
+            }
             margin-top: 20px;
             width: 100%;
             margin-bottom: 40px;
-            display: flex;
             gap: 200px;
 
             .forWho{
                 padding: 10px;
                 width: 100%;
                 display: flex;
-                flex-direction: column;
+                flex-direction: row;
                 color: rgb(67, 67, 67);
                 span{
+                    h4{
+                        margin-top: 10px;
+                    }
+                    width: 100%;
                     margin-top: 20px;
                     border-bottom: 1px solid gray;
                     padding-bottom: 7px;
@@ -49,17 +59,17 @@ $primaryClr : rgb(92, 97, 248);
             border-radius: 10px;
             flex: 1;
             margin: 15px 5px;
-            min-width: 350px;
+            min-width: 220px;
             img{
                 width: auto;
-                height: 350px;
+                height: 250px;
                 margin: auto;
                 max-width: 100%;
             }
             h2{
                 padding-top: 30px;
                 height: 60px;
-                margin: 0;
+                margin: 5px;
             }
             h3{
                 color: rgb(6, 85, 6);
@@ -69,6 +79,9 @@ $primaryClr : rgb(92, 97, 248);
                 color: $primaryClr;
                 cursor: pointer;
                 transform: scale(1.0);
+            }
+            h5{
+                margin: 0;
             }
             h4:hover{
                 transform: scale(1.1);
@@ -115,9 +128,18 @@ $primaryClr : rgb(92, 97, 248);
 }
 @media only screen and (min-width: 1000px) {
   .products{
+      flex-direction: row;
       .search{
           input{
               min-width: 50%;
+          }
+      }
+      .filterSearch{
+          padding: 30px;
+          .textField{
+            .forWho{
+                flex-direction: column;
+            }
           }
       }
     .productsPanel{
@@ -163,4 +185,37 @@ $primaryClr : rgb(92, 97, 248);
         }
     }
 }
+}
+@media only screen and (max-width: 600px) {
+    .products{
+        .card{
+            min-width: 150px !important;
+            min-height: 150px !important;
+            h2{
+                font-size: large;
+            }
+            h3{
+                font-size: medium;
+                margin: 0;
+            }
+            h4{
+                font-size: small;
+            }
+            img{
+                height: 150px !important;
+                margin: 0 !important;
+                object-fit: cover;
+            }
+            .blackOverlay{
+                height: 60px !important;
+                svg{
+                    padding: 0 !important;
+                    margin: 0 !important;
+                    width: 50px !important;
+                    height: auto !important;
+                }
+            }
+
+        }
+    }
 }

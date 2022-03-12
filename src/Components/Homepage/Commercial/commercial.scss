@@ -1,0 +1,41 @@
+.commercial{
+    width: 100%;
+    position: relative;
+    video{
+        width: 100%;
+    }
+    a{
+        position: absolute;
+        bottom: 50px;
+        left: 50px;
+        background-color: white;
+        color: black;
+        text-decoration: none;
+        padding: 15px;
+        min-width: 150px;
+        text-align: center;
+    }
+    h1{
+        position: absolute;
+        bottom:  100px;
+        left: 50px;
+        color: white;
+        font-weight: 700;
+        font-size: 60px;
+    }
+}
+@media only screen and (max-width: 550px){
+.commercial{
+    h1{
+        width: 80px;
+        font-size: large;
+        left: 5%;
+        bottom: 30%;
+    }
+    a{
+        min-width: 100px;
+        left: 5%;
+        bottom: 5%;
+    }
+}
+}
