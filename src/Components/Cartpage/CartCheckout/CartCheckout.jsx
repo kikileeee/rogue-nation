@@ -9,8 +9,14 @@ const CartCheckout = (props) => {
         return totalPrice += item.productPrice * item.quantity
     })
     function checkoutButton() {
-        if (JSON.parse(localStorage.getItem('userInfo')) !== null) {
+        if (JSON.parse(localStorage.getItem('userInfo')) !== null && totalPrice > 0) {
             setIsOpen(true)
+        }
+        else if (totalPrice == 0 && JSON.parse(localStorage.getItem('userInfo')) === null){
+            alert('Guest must me logged in to make an purchase and also cart is empty')
+        }
+        else if (totalPrice == 0){
+            alert('Cart is empty')
         }
         else {
             alert('Guest must me logged in')

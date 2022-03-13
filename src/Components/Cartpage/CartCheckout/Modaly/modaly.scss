@@ -68,6 +68,73 @@ $primaryClr : rgb(92, 97, 248);
                 font-weight: 600;
                 margin: 5px;
             }
+            .progressBar{
+                width: 40%;
+                height: 30px;
+                border: solid black 1px;
+                border-radius: 20px;
+                div{
+                    border-bottom-left-radius: 20px;
+                    border-top-left-radius: 20px;
+                    height: 100%;
+                    width: 33.33%;
+                    background-color: rgba($color: $primaryClr, $alpha: 1.0);
+                    transition: width 800ms ease-in-out;
+                }
+            }
+        }
+        .span2{
+            .top{
+                display: flex;
+                flex-direction: column;
+            }
+            .row{
+                display: flex;
+            }
+            input{
+                padding: 10px;
+                margin: 10px;
+            }
+            select{
+                margin: 10px;
+                background-color: #d1d1d1;
+            }
+            label{
+                font-weight: 600;
+                font-size: large;
+            }
+            button{
+                margin-bottom: 20px;
+            }
+        }
+        .span3{
+            h3{
+                color: seagreen;
+            }
+        }
+    }
+}
+@media only screen and (max-width: 700px){
+    .modaly{
+        .form{width: 80%;
+           
+        top: 70px;
+    }
+    }
+}
+@media only screen and (max-width: 400px){
+    .modaly{
+        .form{width: 100%;     
+        }
+    }
+}
+@media only screen and (max-width: 1250px){
+    .modaly{
+        .form{  
+            div{
+                flex-direction: column;
+            }  
+
         }
     }
 }
