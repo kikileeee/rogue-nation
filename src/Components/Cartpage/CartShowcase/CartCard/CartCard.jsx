@@ -2,6 +2,7 @@ import React from 'react'
 import './cartCard.scss'
 import { v4 as uuidv4 } from 'uuid'
 import { useRef, useState } from 'react';
+import {FiTrash2} from 'react-icons/fi'
 
 const CartCard = (props) => {
     const deleteButton = useRef()
@@ -86,7 +87,7 @@ const CartCard = (props) => {
                         <p>{item.quantity}</p>
                         <button onClick={() => { plusQuantity(item) }}>+</button>
                     </div>
-                    <button onClick={() => { deleteCard(item) }}><p>x</p></button>
+                    <button onClick={() => { deleteCard(item) }}><p><FiTrash2/></p></button>
                 </div>
             ))}
         </div>

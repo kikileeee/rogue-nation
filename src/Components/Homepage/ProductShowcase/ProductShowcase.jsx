@@ -74,7 +74,7 @@ const ProductShowcase = (props) => {
                         {Products.map(product => (
                             <div className='card' key={uuidv4()}>
                                 <h2>{product.productName}</h2>
-                                <h3>Current price: {product.productPrice}$</h3>
+                                <h3>{product.productPrice}$</h3>
                                 <h4 onClick={() => {navigate(`/productInfo`,{state:{product:product}})}}>Click for more info</h4>
                                 <img src={require(`../ProductShowcase/images/${product.productImage}`)} alt="" />
                                 <div className='blackOverlay'>

@@ -16,16 +16,28 @@ const Products = (props) => {
     const [Search, setSearch] = useState('')
     const [sFader, setsFader] = useState()
     const [Check, setCheck] = useState([])
+    const [posts, setPosts] = useState([])
+    const [currentPage, setCurrentPage] = useState(1)
+    const [postsPerPage, setPostsPerPage] = useState(6)
     const [checkedState, setCheckedState] = useState(
         new Array(12).fill(false)
     );
     const navigate = useNavigate()
+    let prodArr = [...mappingProducts().filter(e => {
+        if (Search == '') {
+            return e
+        } else if (e.productName.toLowerCase().includes(Search.toLowerCase())) {
+            return e
+        }
+    })]
+
+    const indexOfLastPost = currentPage * postsPerPage
+    const indexOfFirstPost = indexOfLastPost - postsPerPage
+    const currentPosts = prodArr.slice(indexOfFirstPost, indexOfLastPost)
 
     let count = -1
-
     const port = process.env.PORT || '9000'
     const ip = process.env.REACT_APP_IP || 'http://192.168.1.113:9000/'
-
 
     function handleOnChange(index) {
         let newArr = [...checkedState]
@@ -40,7 +52,7 @@ const Products = (props) => {
     function writeCard(x) {
         return <div className='card' key={uuidv4()}>
             <h2>{x.productName}</h2>
-            <h3>Current price: {x.productPrice}$</h3>
+            <h3> {x.productPrice}$</h3>
             <h5>For: {x.gender}</h5>
             <h4 onClick={() => { navigate(`/productInfo`, { state: { product: x } }) }}>Click for more info</h4>
             <img src={require(`../Homepage/ProductShowcase/images/${x.productImage}`)} alt="" />
@@ -155,7 +167,6 @@ const Products = (props) => {
                 return false
             }
         }
-
         if (checkedState.every(e => e === false)) {
             return Products
         }
@@ -183,6 +194,27 @@ const Products = (props) => {
         }
 
     }
+    function checkBoxClick(curCount) {
+        handleOnChange(curCount)
+        setCurrentPage(1)
+    }
+    function page() {
+        let numberOfButtons = Math.ceil(prodArr.length / postsPerPage)
+        let arr = []
+        for (let i = 1; i <= numberOfButtons; i++) {
+            arr.push(i);
+        }
+        if (prodArr.length > postsPerPage - 1) {
+            return arr.map(e => {
+                if (e == currentPage) {
+                    return <button className='active' key={uuidv4()} onClick={() => setCurrentPage(e)}>{e}</button>
+                } else {
+
+                    return <button key={uuidv4()} onClick={() => setCurrentPage(e)}>{e}</button>
+                }
+            })
+        }
+    }
     return (
         <>
             <div className='faderGreen'></div>
@@ -193,7 +225,7 @@ const Products = (props) => {
                     <div className="filterSearch">
                         <TextField
                             label="Search"
-                            onChange={e => { setSearch(e.target.value) }}
+                            onChange={e => { setSearch(e.target.value); setCurrentPage(1) }}
                             InputProps={{
                                 endAdornment: (
                                     <InputAdornment position='end'>
@@ -212,7 +244,7 @@ const Products = (props) => {
                                         {item.check.map(e => {
                                             count += 1
                                             let curCount = count
-                                            return <div key={uuidv4()}><input type="checkbox" id={e.type} checked={checkedState[curCount]} onChange={() => handleOnChange(curCount)} /><label htmlFor={e.type}>{e.text}</label></div>
+                                            return <div key={uuidv4()}><input type="checkbox" id={e.type} checked={checkedState[curCount]} onChange={() => checkBoxClick(curCount)} /><label htmlFor={e.type}>{e.text}</label></div>
                                         })}
                                     </span>
                                 })}
@@ -225,21 +257,19 @@ const Products = (props) => {
 
 
                     <div className='productsPanel'>
-                        {/* {mappingProducts()} */}
-                        {mappingProducts().filter(e => {
-                            if (Search == '') {
-                                return e
-                            } else if (e.productName.toLowerCase().includes(Search.toLowerCase())) {
-                                return e
-
-                            }
-                        }).map(product => {
+                        {currentPosts.map(product => {
                             return writeCard(product)
-                        })}
+                        })
+                        }
 
+                        <div className='pagination'>
+                            {page()}
+                        </div>
                     </div>
                 </div >
+
             </div >
+
             <Footer />
         </>
     )
