@@ -24,7 +24,7 @@ const Login = () => {
     confirmPassword: confirmPassword
   }
   const port = process.env.PORT || '9000'
-  const ip = process.env.REACT_APP_IP || 'http://192.168.1.113:9000/'
+  const ip = process.env.REACT_APP_IP || 'https://api-react-stop.herokuapp.com/'
   function sendData() {
     fetch(`${ip}users`, {
       method: 'POST',

@@ -24,7 +24,7 @@ const Products = (props) => {
     let count = -1
 
     const port = process.env.PORT || '9000'
-    const ip = process.env.REACT_APP_IP || 'http://192.168.1.113:9000/'
+    const ip = process.env.REACT_APP_IP || 'https://api-react-stop.herokuapp.com/'
 
 
     function handleOnChange(index) {

@@ -42,6 +42,7 @@ $primaryClr : rgb(92, 97, 248);
                 min-width: 200px;
                 width: 60%;
                 padding: 10px;
+                border: 2px solid gray;
             }
             button{
                 margin: 20px;
@@ -94,10 +95,11 @@ $primaryClr : rgb(92, 97, 248);
             input{
                 padding: 10px;
                 margin: 10px;
+                border: 2px solid gray;
             }
             select{
                 margin: 10px;
-                background-color: #d1d1d1;
+                background-color: #e8e8e8;
             }
             label{
                 font-weight: 600;
