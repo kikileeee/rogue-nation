@@ -10,7 +10,7 @@ const Footer = () => {
     const [sFader, setsFader] = useState()
     function newsLetter() {
         if (refInput.current.value !== ''){
-        setsFader(<Fader name='Added email adress for Newsletter' />)
+        setsFader(<Fader name='Added email adress for Newsletter' type='success'/>)
         refInput.current.value = '';
         //regex
         // red border

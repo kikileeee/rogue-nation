@@ -26,10 +26,11 @@ const Navbar = (props) => {
       <nav className='navBar'>
         <ul>
           <div className='firstNav'>
-            <li><a href="/">RogueNation</a></li>
-            <li> <a href="/products">Our products</a></li>
+            <li><a href="/"><img src={require('./roguenation.jpg')}></img></a></li>
           </div>
           <div className='secondNav'>
+            
+          <li> <a href="/products">Products</a></li>
             <li><a className='numberCart' href="/cart" data-after={props.cartNumber}><AddShoppingCartIcon /></a></li>
             <li>
               <div className="dropdown">

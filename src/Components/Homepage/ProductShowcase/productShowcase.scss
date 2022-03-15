@@ -31,9 +31,6 @@ $primaryClr : rgb(69, 69, 75);
                     height: 100%;
                 }
             }
-            .back:hover, .next:hover{
-                color: $primaryClr;
-            }
             .divBack{
                 position: absolute;
                 left: 30px;
@@ -208,3 +205,41 @@ $primaryClr : rgb(69, 69, 75);
             }
     }
   }}
+  
+@media only screen and (max-width: 500px){
+      .productShowcaseWrapper{
+          .blackOverlay{
+              width: 100% !important;
+          }
+          .divBack, .divNext{
+              button{
+                  width: 50px !important;
+                  height: 50px !important;
+              }
+              svg{
+                  width: 30px !important;
+              }
+          }
+          .productCard{
+              div{
+                  min-width: 100px !important;
+                  width: 100px !important;
+                  height: max-content !important;
+                  h2{
+                      font-size: medium !important;
+                  }
+                  h3{
+                      font-size: small;
+                      height: 20px !important;
+                    h4{
+                        font-size: small;
+                    }
+                  }
+                  svg{
+                      width: 30px !important;
+                      height: 30px !important;
+                  }
+              }
+          }
+      }
+  }

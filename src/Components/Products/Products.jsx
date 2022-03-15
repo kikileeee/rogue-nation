@@ -80,7 +80,7 @@ const Products = (props) => {
         let a = []
         let pushNewData = true
         a = JSON.parse(localStorage.getItem('cart')) || [];
-        setsFader(<Fader name='Item has been added to a cart' />)
+        setsFader(<Fader name='Item has been added to a cart' type='success' />)
 
 
         let total = 1
@@ -262,11 +262,13 @@ const Products = (props) => {
                         })
                         }
 
-                        <div className='pagination'>
+                    </div>
+                    
+                </div >
+                
+                <div className='pagination'>
                             {page()}
                         </div>
-                    </div>
-                </div >
 
             </div >
 

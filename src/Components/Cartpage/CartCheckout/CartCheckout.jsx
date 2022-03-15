@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react'
+import Fader from '../../Fader/Fader'
 import './cartCheckout.scss'
 import Modaly from './Modaly/Modaly'
 
 const CartCheckout = (props) => {
     const [isOpen, setIsOpen] = useState(false)
+    const [sFader, setsFader] = useState()
     let totalPrice = 0
     props.totalPrice.map(item => {
         return totalPrice += item.productPrice * item.quantity
@@ -12,15 +14,11 @@ const CartCheckout = (props) => {
         if (JSON.parse(localStorage.getItem('userInfo')) !== null && totalPrice > 0) {
             setIsOpen(true)
         }
-        else if (totalPrice == 0 && JSON.parse(localStorage.getItem('userInfo')) === null){
-            alert('Guest must me logged in to make an purchase and also cart is empty')
+        else if (JSON.parse(localStorage.getItem('userInfo')) === null){
+            setsFader(<Fader name='User must be logged in' type='danger' />)
         }
         else if (totalPrice == 0){
-            alert('Cart is empty')
-        }
-        else {
-            alert('Guest must me logged in')
-            setIsOpen(false)
+            setsFader(<Fader name='Cart is empty' type='danger'/>)
         }
 
     }
@@ -47,6 +45,7 @@ const CartCheckout = (props) => {
                 <button onClick={() => checkoutButton()}>
                     Checkout
                 </button>
+                {sFader}
             </div>
         </>
     )

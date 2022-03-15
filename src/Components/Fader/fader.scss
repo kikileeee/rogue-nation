@@ -1,3 +1,37 @@
+
+.danger{
+    position:fixed ;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: -1;
+    color: white;
+    font-weight: 500;
+    font-size: larger;
+    background-color: rgba(46, 139, 86, 0);
+    padding: 20px;
+    pointer-events: none;
+    border-radius: 10px;
+    animation: white-red 2.5s ease-in;
+    @keyframes white-red {
+        0%{
+            z-index: 5;
+        }
+        10%{
+            background-color: rgb(252, 68, 68);
+        }
+        80%{
+            background-color: rgb(252, 68, 68);
+        }
+        99%{
+            background-color: rgba(46, 139, 86, 0);
+            z-index: 5;
+        }
+        100%{
+            z-index: -1;
+        }
+    } 
+}
 .popup{
     position:fixed ;
     top: 50%;
