@@ -26,7 +26,7 @@ const Navbar = (props) => {
       <nav className='navBar'>
         <ul>
           <div className='firstNav'>
-            <li><a href="/"><img src={require('./roguenation.jpg')}></img></a></li>
+            <li><a href="/"><img src={require('./roguetran.png')}></img></a></li>
           </div>
           <div className='secondNav'>
             

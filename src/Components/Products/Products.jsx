@@ -19,6 +19,7 @@ const Products = (props) => {
     const [posts, setPosts] = useState([])
     const [currentPage, setCurrentPage] = useState(1)
     const [postsPerPage, setPostsPerPage] = useState(6)
+    const [saleInfo, setSaleInfo] = useState([])
     const [checkedState, setCheckedState] = useState(
         new Array(12).fill(false)
     );
@@ -52,7 +53,7 @@ const Products = (props) => {
     function writeCard(x) {
         return <div className='card' key={uuidv4()}>
             <h2>{x.productName}</h2>
-            <h3> {x.productPrice}$</h3>
+            {sales(x)}
             <h5>For: {x.gender}</h5>
             <h4 onClick={() => { navigate(`/productInfo`, { state: { product: x } }) }}>Click for more info</h4>
             <img src={require(`../Homepage/ProductShowcase/images/${x.productImage}`)} alt="" />
@@ -76,8 +77,21 @@ const Products = (props) => {
             SetProducts(data)
         }))
     }, [])
+    useEffect(() => {
+        fetch(`${ip}` + 'sales', {
+            method: 'GET',
+            headers: { 'Content-Type': 'application/json' }
+        }).then(response => response.json().then(data => {
+            setSaleInfo(data)
+        }))
+    }, [])
     function addItem(x) {
         let a = []
+        saleInfo.forEach(e => {
+            if (x.productid == e.productid) {
+                x.productPrice = e.saleprice
+            }
+        })
         let pushNewData = true
         a = JSON.parse(localStorage.getItem('cart')) || [];
         setsFader(<Fader name='Item has been added to a cart' type='success' />)
@@ -213,6 +227,21 @@ const Products = (props) => {
                     return <button key={uuidv4()} onClick={() => setCurrentPage(e)}>{e}</button>
                 }
             })
+        }
+    }
+    function sales(x) {
+
+        const filtered = saleInfo.filter(item => item.productid == x.productid)
+        if (filtered.length > 0) {
+            return <span key={uuidv4()}>
+                <p className='onSale'>SALE</p>
+                <span className='flexH3'>
+                    <h3 className='crossedOver' >{x.productPrice}$</h3>
+                    <h3 className='notCrossedOver'>{filtered[0].saleprice}$</h3></span>
+            </span>
+        }
+        else {
+            return <h3 key={uuidv4()}>{x.productPrice}$</h3>
         }
     }
     return (

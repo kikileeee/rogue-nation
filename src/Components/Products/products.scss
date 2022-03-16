@@ -33,7 +33,38 @@ $primaryClr : rgb(69, 69, 75);
     }
 }
 .products{
-    
+    .flexH3{
+        display: flex;
+        width: 100%;
+    }
+    .onSale{
+        background-color: rgb(255, 81, 0);
+        color: white;
+        font-weight: 550;
+        writing-mode: vertical-rl;
+        text-orientation: upright;
+        min-height: 100px;
+        padding: 10px;
+        position: absolute;
+        top: 0;
+        right: 0;
+        border-bottom-left-radius: 7px;
+        border-bottom-right-radius: 7px;
+    }
+    .crossedOver{
+        text-decoration: line-through;
+        text-decoration-color: black;
+        text-decoration-thickness: 2px;
+        width: min-content;
+        margin-left: auto;
+        padding-right: 10px;
+    }
+    .notCrossedOver{
+        width: min-content;
+        margin-right: auto;
+        padding-left: 10px;
+        color: seagreen;
+    }
     display: flex;
     flex-direction: column;
     .filterSearch{
@@ -82,7 +113,12 @@ $primaryClr : rgb(69, 69, 75);
         grid-template-columns: 1fr 1fr;
         width: 92%;
         margin: auto;
-        .card{
+        .card{   
+            margin: 2vh;
+            transform: scale(1.0);
+            border-radius: 8px;
+            transition: ease-in-out all 200ms;
+            z-index: 1;
             -webkit-box-shadow: 0px 0px 36px -3px rgba(0,0,0,0.75);
             -moz-box-shadow: 0px 0px 36px -3px rgba(0,0,0,0.75);
             box-shadow: 0px 0px 36px -3px rgba(0,0,0,0.75);
@@ -229,14 +265,17 @@ $primaryClr : rgb(69, 69, 75);
             grid-template-columns: 1fr;
         }
         .card{
+            
             min-width: 150px !important;
             min-height: 150px !important;
+            p{
+                padding: 20px;
+            }
             h2{
                 font-size: large;
             }
             h3{
                 font-size: medium;
-                margin: 0;
             }
             h4{
                 font-size: small;

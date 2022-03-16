@@ -10,6 +10,7 @@ import Fader from '../../Fader/Fader'
 const ProductShowcase = (props) => {
     const [Products, SetProducts] = useState([]);
     const [sFader, setsFader] = useState()
+    const [saleInfo, setSaleInfo] = useState([])
     const inputBackNext = useRef()
     const navigate = useNavigate()
     const port = process.env.PORT || '9000'
@@ -23,6 +24,14 @@ const ProductShowcase = (props) => {
             SetProducts(data)
         }))
     }, [])
+    useEffect(() => {
+        fetch(`${ip}` + 'sales', {
+            method: 'GET',
+            headers: { 'Content-Type': 'application/json' }
+        }).then(response => response.json().then(data => {
+            setSaleInfo(data)
+        }))
+    }, [])
     const scroll = (scrollOffset) => {
         inputBackNext.current.scrollLeft += scrollOffset;
     };
@@ -34,10 +43,15 @@ const ProductShowcase = (props) => {
         scroll(340)
     }
     function addItem(x) {
+        saleInfo.forEach(e => {
+            if (x.productid == e.productid) {
+                x.productPrice = e.saleprice
+            }
+        })
         let a = []
         let pushNewData = true
         a = JSON.parse(localStorage.getItem('cart')) || [];
-        setsFader(<Fader name='Item has been added to a cart' type='success'/>)
+        setsFader(<Fader name='Item has been added to a cart' type='success' />)
 
         let total = 1
         let cart = a.map(e => {
@@ -59,6 +73,21 @@ const ProductShowcase = (props) => {
             localStorage.setItem('cart', JSON.stringify(a))
         }
     }
+    function sales(x) {
+
+        const filtered = saleInfo.filter(item => item.productid == x.productid)
+        if (filtered.length > 0) {
+            return <span key={uuidv4()}>
+                <p className='onSale'>SALE</p>
+                <span className='flexH3'>
+                    <h3 className='crossedOver' >{x.productPrice}$</h3>
+                    <h3 className='notCrossedOver'>{filtered[0].saleprice}$</h3></span>
+            </span>
+        }
+        else {
+            return <h3 key={uuidv4()}>{x.productPrice}$</h3>
+        }
+    }
 
 
     return (
@@ -74,8 +103,8 @@ const ProductShowcase = (props) => {
                         {Products.map(product => (
                             <div className='card' key={uuidv4()}>
                                 <h2>{product.productName}</h2>
-                                <h3>{product.productPrice}$</h3>
-                                <h4 onClick={() => {navigate(`/productInfo`,{state:{product:product}})}}>Click for more info</h4>
+                                {sales(product)}
+                                <h4 onClick={() => { navigate(`/productInfo`, { state: { product: product } }) }}>Click for more info</h4>
                                 <img src={require(`../ProductShowcase/images/${product.productImage}`)} alt="" />
                                 <div className='blackOverlay'>
                                     <button onClick={() => { addItem(product) }}><AddShoppingCartIcon /></button>

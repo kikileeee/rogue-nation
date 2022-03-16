@@ -26,6 +26,12 @@ app.get('/lucky', function (req, res, next) {
   pool.query(`SELECT * FROM products ORDER BY RAND()`, (error, data) => {
     res.send(data)
   })
+
 });
+app.get('/sales', function (req, res, next) {
+  pool.query(`SELECT * FROM sale`, (error, data) => {
+    res.send(data)
+  })
+})
 
 module.exports = app;

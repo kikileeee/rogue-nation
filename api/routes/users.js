@@ -11,10 +11,6 @@ const pool = createPool({
   database: 'shopreact'
 });
 
-// app.get('/', function (req, res, next) {
-//   console.log('ssfs')
-// })
-
 app.post('/', (req, res) => {
 
   pool.query(`SELECT * FROM users`, async (error, data) => {
