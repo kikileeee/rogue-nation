@@ -36,7 +36,7 @@ const Navbar = (props) => {
               <div className="dropdown">
                 <a className="dropbtn">{user}</a>
                 <div className="dropdown-content">
-                  <a href="#" className='aDrop'>Settings</a>
+                  <a href="settings" className='aDrop'>Settings</a>
                   <a href="login" className='aDrop' onClick={resetData}>{login}</a>
                 </div>
               </div>

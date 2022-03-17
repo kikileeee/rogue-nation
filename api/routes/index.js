@@ -18,7 +18,9 @@ app.get('/popular', function (req, res, next) {
   })
 });
 app.get('/lowToHigh', function (req, res, next) {
-  pool.query(`SELECT * FROM products ORDER by productPrice ASC`, (error, data) => {
+  pool.query(`SELECT * FROM products, sale
+  where products.productid = sale.productid
+  GROUP by productPrice asc`, (error, data) => {
     res.send(data)
   })
 });

@@ -7,6 +7,7 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 import Cart from "./Components/Cartpage/Cart";
 import Products from "./Components/Products/Products";
 import ProductInfo from "./Components/ProductInfo/ProductInfo";
+import Settings from "./Components/Settings/Settings";
 
 function App() {
   let storage = JSON.parse(localStorage.getItem('cart')) || []
@@ -29,7 +30,9 @@ function App() {
         </Route>
         <Route path='/productInfo' element={<ProductInfo cartNumber={cartNumber} setCartNumber={setCartNumber}/>}>
         </Route>
-      </Routes>
+        <Route path='/settings' element={<Settings cartNumber={cartNumber} setCartNumber={setCartNumber}/>}>
+        </Route>
+      </Routes >
   )
 }
 

@@ -1,7 +1,6 @@
 $primaryClr : rgb(69, 69, 75);
 
 .footer{
-    margin-top: 20px;
     color: white;
     text-align: center;
     button{
@@ -27,8 +26,6 @@ $primaryClr : rgb(69, 69, 75);
         width: 100%;
         height: 200px;
         background-color: $primaryClr;
-        div{
-        }
     }
     .lowerFooter{
         width: 100%;

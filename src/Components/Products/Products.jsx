@@ -25,6 +25,11 @@ const Products = (props) => {
     );
     const navigate = useNavigate()
     let prodArr = [...mappingProducts().filter(e => {
+        saleInfo.forEach(n => {
+            if (e.productid == n.productid){
+                e.productPrice = n.saleprice
+            }
+        })
         if (Search == '') {
             return e
         } else if (e.productName.toLowerCase().includes(Search.toLowerCase())) {

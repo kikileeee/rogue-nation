@@ -1,0 +1,54 @@
+$primaryClr : rgb(69, 69, 75);
+
+.sidebar{
+    display: flex;
+    flex-direction: column;
+    min-height: 800px;
+    min-width: 120px;
+    max-width: 450px;
+    
+    .bgPic{
+        display: flex;
+        flex-direction: column;
+        max-height: 250px;
+        height: 200px;
+        width: 100%;
+        background-image: url('./mountains.jpg');
+        background-size: cover;
+        background-position: center;
+        img{
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            margin: auto;
+        }
+        p{
+            color: white;
+            font-weight: 500;
+            font-size: larger;
+            text-align: center;
+        }
+    }
+    button{
+        width: 100%;
+        padding: 15px;
+        margin-right: 0;
+        color: rgb(181, 181, 181);
+        font-weight: 500;
+        font-size: large;
+        border: none;
+        background-color: rgb(69, 69, 75);;
+        cursor: pointer;
+        border-bottom: 1px solid rgb(79, 79, 87);
+        border-bottom-left-radius: 5px;
+        border-top-left-radius: 5px;
+        text-align: left;
+    }
+    .activeButton{
+        color: white;
+    }
+    button:hover{
+        color: white;
+    }
+    
+}

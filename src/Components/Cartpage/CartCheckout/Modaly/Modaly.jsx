@@ -87,7 +87,6 @@ const Modaly = (props) => {
           <option value="visa">Visa</option>
           <option value="mastercard">MasterCard</option>
         </select>
-        <button onClick={next}>Next</button>
         <h5>We accept</h5>
         <div className='icons'>
 
@@ -95,6 +94,8 @@ const Modaly = (props) => {
           <SiVisa size={50} />
           <SiMastercard size={30} />
         </div>
+        
+        <button onClick={next}>Next</button>
 
       </span>
     } else if (step == 2) {

@@ -245,6 +245,9 @@ $primaryClr : rgb(69, 69, 75);
   
 @media only screen and (max-width: 500px){
       .productShowcaseWrapper{
+          .productShowcase{
+            min-height: fit-content;
+      }
           .blackOverlay{
               width: 100% !important;
               svg{
