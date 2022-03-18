@@ -23,11 +23,11 @@ const Settings = (props) => {
     }
     return (<>
         <Navbar cartNumber={props.cartNumber} setCartNumber={props.setCartNumber} />
-        <div className='admin'>
-            <div className='adminSidebar'>
+        <div className='work'>
+            <div className='workSidebar'>
                 <Sidebar Panel={Panel} SetPanel={setPanel} />
             </div>
-            <div className='adminPanel'>
+            <div className='workPanel'>
                 {writePanel()}
             </div>
         </div>

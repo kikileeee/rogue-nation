@@ -3,7 +3,9 @@ import './orderPanel.scss'
 
 const OrderPanel = () => {
   return (
-    <div>orderPanel</div>
+    <div className='orderPanel'>
+      <p>Order Panel / work in progress</p>
+    </div>
   )
 }
 

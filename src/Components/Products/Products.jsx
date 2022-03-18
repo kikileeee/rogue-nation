@@ -10,6 +10,7 @@ import TextField from '@mui/material/TextField';
 import { useNavigate } from 'react-router-dom'
 import Fader from '../Fader/Fader';
 import Footer from '../Homepage/Footer/Footer';
+import { useDispatch } from 'react-redux';
 
 const Products = (props) => {
     const [Products, SetProducts] = useState([]);
@@ -24,10 +25,15 @@ const Products = (props) => {
         new Array(12).fill(false)
     );
     const navigate = useNavigate()
+    const dispatch = useDispatch()
+    const increment = () => {
+        dispatch({ type: 'INC' })
+    }
+
     let prodArr = [...mappingProducts().filter(e => {
         saleInfo.forEach(n => {
-            if (e.productid == n.productid){
-                e.productPrice = n.saleprice
+            if (e.productid == n.productid) {
+                // e.productPrice = n.saleprice
             }
         })
         if (Search == '') {
@@ -91,6 +97,7 @@ const Products = (props) => {
         }))
     }, [])
     function addItem(x) {
+        increment()
         let a = []
         saleInfo.forEach(e => {
             if (x.productid == e.productid) {
@@ -100,7 +107,6 @@ const Products = (props) => {
         let pushNewData = true
         a = JSON.parse(localStorage.getItem('cart')) || [];
         setsFader(<Fader name='Item has been added to a cart' type='success' />)
-
 
         let total = 1
         let cart = a.map(e => {
@@ -121,6 +127,14 @@ const Products = (props) => {
             props.setCartNumber(`${total}`)
             localStorage.setItem('cart', JSON.stringify(a))
         }
+        fetch(`${ip}popular`, {
+            method: 'GET',
+            headers: { 'Content-Type': 'application/json' }
+        }).then(response => response.json().then(data => {
+            console.log('first')
+            SetProducts(data)
+        }))
+
     }
     function mappingProducts() {
         let productArray = new Array(...Products)
@@ -297,12 +311,12 @@ const Products = (props) => {
                         }
 
                     </div>
-                    
+
                 </div >
-                
+
                 <div className='pagination'>
-                            {page()}
-                        </div>
+                    {page()}
+                </div>
 
             </div >
 

@@ -72,6 +72,13 @@ const ProductShowcase = (props) => {
             props.setCartNumber(`${total}`)
             localStorage.setItem('cart', JSON.stringify(a))
         }
+        fetch(`${ip}` + props.fetch, {
+            method: 'GET',
+            headers: { 'Content-Type': 'application/json' }
+        }).then(response => response.json().then(data => {
+            console.log('first')
+            SetProducts(data)
+        }))
     }
     function sales(x) {
 

@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react'
 import './navbar.scss'
 import AddShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+import { useSelector } from 'react-redux';
 
 const Navbar = (props) => {
+  const cartNumber = useSelector((state) => state)
   const [user, setUser] = useState('Guest')
   const [login, setLogin] = useState('Log in')
   useEffect(() => {
@@ -30,7 +32,7 @@ const Navbar = (props) => {
           </div>
           <div className='secondNav'>
             
-          <li> <a href="/products">Products</a></li>
+          <li> <a href="/products">Products{cartNumber}</a></li>
             <li><a className='numberCart' href="/cart" data-after={props.cartNumber}><AddShoppingCartIcon /></a></li>
             <li>
               <div className="dropdown">

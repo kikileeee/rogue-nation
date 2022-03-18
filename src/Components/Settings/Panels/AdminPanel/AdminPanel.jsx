@@ -3,7 +3,9 @@ import './adminPanel.scss'
 
 const AdminPanel = () => {
   return (
-    <div>AdminPanel</div>
+    <div className='adminPanel'>
+        <p>Admin Panel / work in progress</p>
+      </div>
   )
 }
 
