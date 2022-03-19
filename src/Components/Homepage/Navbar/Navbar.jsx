@@ -32,7 +32,7 @@ const Navbar = (props) => {
           </div>
           <div className='secondNav'>
             
-          <li> <a href="/products">Products{cartNumber}</a></li>
+          <li> <a href="/products">Products</a></li>
             <li><a className='numberCart' href="/cart" data-after={props.cartNumber}><AddShoppingCartIcon /></a></li>
             <li>
               <div className="dropdown">
