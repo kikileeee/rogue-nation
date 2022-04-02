@@ -2,7 +2,8 @@ import React from 'react'
 import './cartCard.scss'
 import { v4 as uuidv4 } from 'uuid'
 import { useRef, useState } from 'react';
-import {FiTrash2} from 'react-icons/fi'
+import { FiTrash2 } from 'react-icons/fi'
+import {MdRemoveShoppingCart} from 'react-icons/md'
 
 const CartCard = (props) => {
     const deleteButton = useRef()
@@ -34,7 +35,7 @@ const CartCard = (props) => {
                     let filtered = storage.filter(itemFilter => itemFilter !== item)
                     setItemsInProps(filtered)
                     props.setTotalPrice(filtered)
-                    
+
                     let total = 0
                     let cart = filtered.map(e => {
                         total += e.quantity
@@ -69,29 +70,32 @@ const CartCard = (props) => {
                 item.quantity += 1
                 setItemsInProps(storage)
                 props.setTotalPrice(storage)
-                props.setCartNumber(`${total +1}`)
+                props.setCartNumber(`${total + 1}`)
                 localStorage.removeItem('cart')
                 localStorage.setItem('cart', JSON.stringify(storage));
             }
         })
     }
-    return (
-        <div className='cartCard'>
-            {itemsInProps.map(item => (
-                <div ref={deleteButton} className='items' key={uuidv4()}>
-                    <img src={require(`../../../Homepage/ProductShowcase/images/${item.productImage}`)} alt="" />
-                    <p className='name'>{item.productName}</p>
-                    <p className='price'>{item.productPrice}$</p>
-                    <div className='quantity'>
-                        <button onClick={() => { minusQuantity(item) }}>-</button>
-                        <p>{item.quantity}</p>
-                        <button onClick={() => { plusQuantity(item) }}>+</button>
+    if (itemsInProps.length === 0) {
+        return <div className='emptyCart'><MdRemoveShoppingCart size={40}/><h2>Cart is Empty</h2></div>
+    } else {
+        return (
+            <div className='cartCard'>
+                {itemsInProps.map(item => (
+                    <div ref={deleteButton} className='items' key={uuidv4()}>
+                        <img src={require(`../../../Homepage/ProductShowcase/images/${item.productImage}`)} alt="" />
+                        <p className='name'>{item.productName}</p>
+                        <p className='price'>{item.productPrice}$</p>
+                        <div className='quantity'>
+                            <button onClick={() => { minusQuantity(item) }}>-</button>
+                            <p>{item.quantity}</p>
+                            <button onClick={() => { plusQuantity(item) }}>+</button>
+                        </div>
+                        <button onClick={() => { deleteCard(item) }}><p><FiTrash2 /></p></button>
                     </div>
-                    <button onClick={() => { deleteCard(item) }}><p><FiTrash2/></p></button>
-                </div>
-            ))}
-        </div>
-    )
+                ))}
+            </div>
+        )
+    }
 }
-
 export default CartCard

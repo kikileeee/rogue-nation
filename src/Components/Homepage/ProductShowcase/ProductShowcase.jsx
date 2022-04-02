@@ -4,6 +4,7 @@ import { v4 as uuidv4 } from 'uuid'
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCartSharp';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
+import {FcDeleteDatabase} from 'react-icons/fc'
 import { useNavigate } from 'react-router-dom'
 import Fader from '../../Fader/Fader'
 
@@ -15,6 +16,7 @@ const ProductShowcase = (props) => {
     const navigate = useNavigate()
     const port = process.env.PORT || '9000'
     const ip = process.env.REACT_APP_IP || 'http://192.168.1.113:9000/'
+    const [isItFetched, setIsItFetched] = useState(false)
 
     useEffect(() => {
         fetch(`${ip}` + props.fetch, {
@@ -22,6 +24,9 @@ const ProductShowcase = (props) => {
             headers: { 'Content-Type': 'application/json' }
         }).then(response => response.json().then(data => {
             SetProducts(data)
+            if (data.length > 0){
+                 setIsItFetched(true)
+            }
         }))
     }, [])
     useEffect(() => {
@@ -96,35 +101,41 @@ const ProductShowcase = (props) => {
         }
     }
 
+    if (!isItFetched) {
+        return <div className='productShowcaseWrapperError'>
+            <FcDeleteDatabase size={100}/>
+            <h2>Database didn't load, wait a few second and then reload</h2>
+            </div>
+    } else {
+        return (
+            <div className='productShowcaseWrapper'>
+                {sFader}
 
-    return (
-        <div className='productShowcaseWrapper'>
-            {sFader}
+                <h1>{props.name}</h1>
+                <div className='productShowcase' ref={inputBackNext}>
+                    <div className='slides'>
+                        <div className='divBack'><button className='back' onClick={goBack} ><ArrowBackIosNewIcon /></button></div>
+                        <div className='divNext'><button className='next' onClick={goNext}><ArrowForwardIosIcon /></button></div>
+                        <div className='productCard'>
+                            {Products.map(product => (
+                                <div className='card' key={uuidv4()}>
+                                    <h2>{product.productName}</h2>
+                                    {sales(product)}
+                                    <h4 onClick={() => { navigate(`/productInfo`, { state: { product: product } }) }}>Click for more info</h4>
+                                    <img src={require(`../ProductShowcase/images/${product.productImage}`)} alt="" />
+                                    <div className='blackOverlay'>
+                                        <button onClick={() => { addItem(product) }}><AddShoppingCartIcon /></button>
 
-            <h1>{props.name}</h1>
-            <div className='productShowcase' ref={inputBackNext}>
-                <div className='slides'>
-                    <div className='divBack'><button className='back' onClick={goBack} ><ArrowBackIosNewIcon /></button></div>
-                    <div className='divNext'><button className='next' onClick={goNext}><ArrowForwardIosIcon /></button></div>
-                    <div className='productCard'>
-                        {Products.map(product => (
-                            <div className='card' key={uuidv4()}>
-                                <h2>{product.productName}</h2>
-                                {sales(product)}
-                                <h4 onClick={() => { navigate(`/productInfo`, { state: { product: product } }) }}>Click for more info</h4>
-                                <img src={require(`../ProductShowcase/images/${product.productImage}`)} alt="" />
-                                <div className='blackOverlay'>
-                                    <button onClick={() => { addItem(product) }}><AddShoppingCartIcon /></button>
-
+                                    </div>
                                 </div>
-                            </div>
 
-                        ))}
+                            ))}
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-    )
+        )
+    }
 }
 
 export default ProductShowcase

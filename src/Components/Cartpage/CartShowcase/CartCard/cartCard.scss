@@ -69,3 +69,13 @@
         }
     }
    }
+.emptyCart{
+    display: flex;
+    padding: 40px;
+    svg{
+        align-self: center;
+    }
+    h2{
+        padding: 20px;
+    }
+}

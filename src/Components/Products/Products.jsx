@@ -7,6 +7,7 @@ import SearchIcon from '@mui/icons-material/Search';
 import IconButton from "@material-ui/core/IconButton";
 import InputAdornment from '@material-ui/core/InputAdornment';
 import TextField from '@mui/material/TextField';
+import {MdNotificationsActive} from 'react-icons/md'
 import { useNavigate } from 'react-router-dom'
 import Fader from '../Fader/Fader';
 import Footer from '../Homepage/Footer/Footer';
@@ -17,7 +18,6 @@ const Products = (props) => {
     const [Search, setSearch] = useState('')
     const [sFader, setsFader] = useState()
     const [Check, setCheck] = useState([])
-    const [posts, setPosts] = useState([])
     const [currentPage, setCurrentPage] = useState(1)
     const [postsPerPage, setPostsPerPage] = useState(6)
     const [saleInfo, setSaleInfo] = useState([])
@@ -29,7 +29,6 @@ const Products = (props) => {
     const increment = () => {
         dispatch({ type: 'INC' })
     }
-
     let prodArr = [...mappingProducts().filter(e => {
         saleInfo.forEach(n => {
             if (e.productid == n.productid) {
@@ -50,6 +49,7 @@ const Products = (props) => {
     let count = -1
     const port = process.env.PORT || '9000'
     const ip = process.env.REACT_APP_IP || 'http://192.168.1.113:9000/'
+
 
     function handleOnChange(index) {
         let newArr = [...checkedState]
@@ -263,6 +263,8 @@ const Products = (props) => {
             return <h3 key={uuidv4()}>{x.productPrice}$</h3>
         }
     }
+    // Check if any product is loaded
+    let numero = true
     return (
         <>
             <div className='faderGreen'></div>
@@ -306,13 +308,20 @@ const Products = (props) => {
 
                     <div className='productsPanel'>
                         {currentPosts.map(product => {
-                            return writeCard(product)
+                            numero = false
+                                return writeCard(product)
                         })
                         }
+                        
+                        {numero && <div className='noProducts'>
+                            <MdNotificationsActive size={60}/>
+                            <h2>No Result from search {Search !== '' && `"${Search}"`}</h2>
+                        </div>}
 
                     </div>
 
                 </div >
+                
 
                 <div className='pagination'>
                     {page()}
