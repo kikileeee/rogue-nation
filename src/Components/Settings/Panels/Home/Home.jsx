@@ -2,7 +2,16 @@ import React, { useState, useEffect } from 'react'
 import './home.scss'
 
 const Home = () => {
+  
+  const port = process.env.PORT || '9000'
+  const ip = process.env.REACT_APP_IP || 'http://192.168.1.113:9000/'
+
+
   const [user, setUser] = useState('Guest')
+  const [password, setPassword] = useState('')
+  const [confirmpassword, setConfirmPassword] = useState('')
+  const [username, setUsername] = useState('')
+
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
@@ -14,6 +23,19 @@ const Home = () => {
       setUser('Guest')
     }
   }, [])
+  function sendData(){
+    if (user === username){
+      console.log('Its same username')
+    } else {
+    let body = {password: password,username: username, confirmpassword:confirmpassword, oldUsername: user}
+    fetch(`${ip}users/update`, {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(body)
+    }).then(response => response.json().then(data =>{
+      console.log(data)
+    }))}
+  }
   return (
     <div className='homePanel'>
       <div className='terms'>
@@ -29,21 +51,21 @@ const Home = () => {
       </div>
       
       <div className='changeName'>
-        <label htmlFor="">Change the Username
-          <input type="text" placeholder={user} />
+        <label htmlFor="">New Username
+          <input type="text" placeholder={user} onChange={e => setUsername(e.target.value)}/>
         </label>
       </div>
       <div className='changeName'>
         <label htmlFor="">Enter the Password
-          <input type="text" placeholder='Password' />
+          <input type="password" placeholder='Password' onChange={e => setPassword(e.target.value)} />
         </label>
       </div>
       <div className='changeName'>
         <label htmlFor="">Repeat the Password
-          <input type="text" placeholder='Confirm the password' />
+          <input type="password" placeholder='Confirm the password' onChange={e => setConfirmPassword(e.target.value)}/>
         </label>
       </div>
-      <button className='change'>Change Username</button>
+      <button className='change' onClick={sendData}>Change Username</button>
     </div>
   )
 }

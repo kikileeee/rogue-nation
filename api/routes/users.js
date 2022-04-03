@@ -88,6 +88,41 @@ app.post('/login', (req, res) => {
   })
 })
 
+app.put('/update', (req, res) => {
+  pool.query(`SELECT * FROM users`, async (error, data) => {
+
+    let keys = Object.values(data)
+    let username = req.body.username
+    let password = req.body.password
+    let confirmPassword = req.body.confirmpassword
+    let oldUsername = req.body.oldUsername
+    let proceed = {
+      loginSuccessful: false,
+      usernameExists: false,
+      passwordFailed: false,
+      passwordNoMatch: false
+    }
+    if (password !== confirmPassword || password === '') {
+      proceed.passwordNoMatch = true
+    }
+    for (i = 0; i < keys.length; i++) {
+      if (oldUsername == keys[i].username && (await bcrypt.compare(password, keys[i].password))) {
+        proceed.loginSuccessful = true
+        proceed.username = keys[i].username
+        break
+      }
+    }
+    for (i = 0; i < keys.length; i++) {
+      if (username == keys[i].username) {
+        console.log('Username already exists')
+        proceed.usernameExists = true
+        break
+      }
+    }
+    res.send(proceed)
+  })
+})
+
 
 
 module.exports = app;
