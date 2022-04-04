@@ -43,6 +43,7 @@ const Login = () => {
 
   }
   return (
+    <div className='LoginWrapper'>
     <form className='login' onSubmit={handleSubmit} >
       <h2>Sign in</h2>
       <input type="text" placeholder="Username" onChange={e => setUsername(e.target.value)} />
@@ -52,6 +53,7 @@ const Login = () => {
       <a href="/signup">Dont have an account? Sign up</a>
       <a href="/" onClick={() => {localStorage.removeItem('userInfo')}}>Continue as a Guest</a>
     </form>
+    </div>
   )
 }
 

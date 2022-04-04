@@ -100,24 +100,35 @@ app.put('/update', (req, res) => {
       loginSuccessful: false,
       usernameExists: false,
       passwordFailed: false,
-      passwordNoMatch: false
+      passwordMatch: true,
+      userInfo: {
+        username:'Guest',
+        adminPrivileges:0
+      }
     }
+    let userid = 0
     if (password !== confirmPassword || password === '') {
-      proceed.passwordNoMatch = true
+      proceed.passwordMatch = false
     }
     for (i = 0; i < keys.length; i++) {
       if (oldUsername == keys[i].username && (await bcrypt.compare(password, keys[i].password))) {
+        proceed.userInfo.adminPrivileges= keys[i].adminPrivileges
+        proceed.userInfo.username = username
+        userid = keys[i].userid
         proceed.loginSuccessful = true
         proceed.username = keys[i].username
         break
       }
     }
     for (i = 0; i < keys.length; i++) {
-      if (username == keys[i].username) {
-        console.log('Username already exists')
+      if (username == keys[i].username || username == '') {
         proceed.usernameExists = true
         break
       }
+    }
+    if (proceed.loginSuccessful && proceed.passwordMatch && !proceed.usernameExists) {
+      pool.query(`UPDATE users SET username='${username}' where userid= ${userid}`, async (error, data) => {
+      })
     }
     res.send(proceed)
   })

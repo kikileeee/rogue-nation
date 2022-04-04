@@ -1,16 +1,23 @@
-$primaryClr : rgb(69, 69, 75);
+$primaryClr : white;
+$secondary: rgb(69, 69, 75);
 
-
+.LoginWrapper{
+    background-color: rgb(160, 160, 160);
+    height: 100vh;
+    background-image: url('./bgs.jpg');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    padding: 80px;
+}
 .login{
-    
 display: flex;
 width: 60%;
 flex-direction: column;
 margin: auto;
-margin-top: 5%;
 background-color: $primaryClr;
 border-radius: 15px;
-color: white;
+color: $secondary;
 gap: 20px;
 font-size: x-large;
 font-weight: 500;
@@ -23,12 +30,12 @@ padding: 10px;
         margin-right: auto;
         min-width: 250px;
         width: 70%;
-        padding: 8px;
         border-radius: 5px;
         border: none;
         font-size: x-large;
         padding: 10px;
         margin-top: 20px;
+        background-color: rgb(213, 213, 213);
     }
     label{
         margin: auto;
@@ -38,7 +45,7 @@ padding: 10px;
         margin-top: 1rem;
         margin-bottom: 1rem;
         width: 150px;
-        background-color: white;
+        background-color: $secondary;
         border: none;
         color: $primaryClr;
         cursor: pointer;
@@ -55,7 +62,7 @@ padding: 10px;
         margin-left: auto;
         margin-right: auto;
         cursor: pointer;
-        color: white;
+        color: $secondary;
         text-decoration: none;
         width: auto;
     }
@@ -66,7 +73,7 @@ padding: 10px;
         text-align: center;
         padding: 0;
         margin: 0;
-        color: orange;
+        color: rgb(255, 77, 0);
         font-size: large;
     }
     .d-none{
@@ -75,6 +82,9 @@ padding: 10px;
 
 }
 @media only screen and (max-width: 700px) {
+    .LoginWrapper{
+        padding: 0;
+    }
     .login{
         width: 100%;
         min-height: 100vh;

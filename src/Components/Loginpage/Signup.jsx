@@ -1,6 +1,6 @@
-import React, { useState} from 'react'
+import React, { useState } from 'react'
 import './login.scss'
-import {  useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 
 const Login = () => {
   const [username, setUsername] = useState('')
@@ -81,7 +81,7 @@ const Login = () => {
 
   }
 
-  return (
+  return (<div className='LoginWrapper'>
     <form className='login' onSubmit={handleSubmit}>
       <h2>Sign up</h2>
       <input type="text" placeholder="Username" onChange={e => setUsername(e.target.value)} />
@@ -95,8 +95,9 @@ const Login = () => {
       <p className={refPasswordSame}>Passwords must be the same</p>
       <button onClick={sendData}>Sign up</button>
       <a href="/login">Already have an account? Sign in</a>
-      <a href="/" onClick={ () => { localStorage.removeItem('userInfo') }}>Continue as a Guest</a>
+      <a href="/" onClick={() => { localStorage.removeItem('userInfo') }}>Continue as a Guest</a>
     </form>
+  </div>
   )
 }
 

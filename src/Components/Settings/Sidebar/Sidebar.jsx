@@ -13,7 +13,16 @@ const Sidebar = (props) => {
   const refAdmin = useRef();
   const [sFader, setsFader] = useState()
   const navigate = useNavigate()
+  const [user, setUser] = useState('Guest')
 
+  useEffect(() => {
+      if (JSON.parse(localStorage.getItem('userInfo')) !== null) {
+        setUser(JSON.parse(localStorage.getItem('userInfo')).username)
+      }
+      else {
+        setUser('Guest')
+      }
+    }, [])
   useEffect(() => {
     if (JSON.parse(localStorage.getItem('userInfo')) !== null) {
       if (JSON.parse(localStorage.getItem('userInfo')).adminPrivileges == 1) {
@@ -39,7 +48,7 @@ const Sidebar = (props) => {
     <div className='sidebar'>
       <div className='bgPic'>
         <img src={require('../../ProductInfo/favicon.ico')} alt="" />
-        <p>Admin</p>
+        <p>{user}</p>
       </div >
       <button onClick={(x) => writePanel(1, x)} className='activeButton' ref={refHome}><FaHome />  Home</button>
       <button onClick={(x) => writePanel(2, x)} ref={refHistory}><FaHistory />  Order history</button>
