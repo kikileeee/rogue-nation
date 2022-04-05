@@ -10,6 +10,9 @@ const Modaly = (props) => {
   const creditInput = useRef()
   const vccInput = useRef()
   const ownerInput = useRef()
+  
+  const port = process.env.PORT || '9000'
+  const ip = process.env.REACT_APP_IP || 'http://192.168.1.113:9000/'
 
   function next() {
     setStep(step + 1)
@@ -56,8 +59,16 @@ const Modaly = (props) => {
     props.setIsOpen(false)
     setStep(1)
     let cart = JSON.parse(localStorage.getItem('cart'))
+    let body = {
+      user:JSON.parse(localStorage.getItem('userInfo')),
+      cart:JSON.parse(localStorage.getItem('cart'))
+    }
+    fetch(`${ip}users/order`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(body)
+    })
     localStorage.removeItem("cart")
-    console.log(cart)
   }
   function onChange(x){
     x.target.style.border = '2px solid gray'
@@ -160,8 +171,7 @@ const Modaly = (props) => {
         </div>
         <h2>You can finish ordering your products</h2>
         <h3>Credit card is valid</h3>
-
-        <a href="/"><button onClick={finish}>Finish ordering</button></a>
+        <a href='/'><button onClick={finish}>Finish ordering</button></a>
 
       </span>
     }

@@ -38,7 +38,6 @@ const Home = () => {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(body)
     }).then(response => response.json().then(data => {
-      console.log(data)
       let userInfo = data.userInfo
 
       setPassword('')
@@ -66,7 +65,7 @@ const Home = () => {
         if (termsAgreed) {
           setWarningTerms()
         } {
-          setWarningTerms(<p className='warning'>Terms and not agreed</p>)
+          setWarningTerms(<p className='warning'>Terms are not agreed to</p>)
         }
       }
 

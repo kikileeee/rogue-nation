@@ -102,8 +102,8 @@ app.put('/update', (req, res) => {
       passwordFailed: false,
       passwordMatch: true,
       userInfo: {
-        username:'Guest',
-        adminPrivileges:0
+        username: 'Guest',
+        adminPrivileges: 0
       }
     }
     let userid = 0
@@ -112,7 +112,7 @@ app.put('/update', (req, res) => {
     }
     for (i = 0; i < keys.length; i++) {
       if (oldUsername == keys[i].username && (await bcrypt.compare(password, keys[i].password))) {
-        proceed.userInfo.adminPrivileges= keys[i].adminPrivileges
+        proceed.userInfo.adminPrivileges = keys[i].adminPrivileges
         proceed.userInfo.username = username
         userid = keys[i].userid
         proceed.loginSuccessful = true
@@ -133,6 +133,31 @@ app.put('/update', (req, res) => {
     res.send(proceed)
   })
 })
+app.post('/order', (req, res) => {
+  let reqData = req.body
+  let danas = new Date()
+  let date = danas.getFullYear() + '-' + (danas.getMonth() + 1) + '-' + danas.getDate()
+
+  
+  let orderNumber = Date.now()
+  console.log(orderNumber)
+  pool.query(`SELECT userid FROM users WHERE username='${req.body.user.username}'`, async (error, firstData) => {
+
+    console.log(orderNumber)
+    pool.query(`INSERT INTO orders (userID, orderNUMBER, orderDATE, shippingSTATUS) VALUES ('${firstData[0].userid}', '${orderNumber}', '${date}', 'Shipping')`, async (error, data) => {
+      for (let i = 0; i < reqData.cart.length; i++) {
+        for (let x = 0; x < reqData.cart[i].quantity; x++) {
+          pool.query(`INSERT INTO orderlistings (orderID, productID, orderNUMBER) VALUES (${firstData[0].userid}, ${reqData.cart[i].productid}, ${orderNumber})`, async (error, data) => {
+            console.log(orderNumber)
+          })
+        }
+      }
+    })
+    
+    res.send()
+  })
+})
+
 
 
 

@@ -10,4 +10,57 @@ $primaryClr : rgb(90, 90, 94);
         padding: 50px;
         margin: 0;
     }
+            min-height: 50vh;
+            .fdisplay{
+                display: flex;
+                padding: 20px;
+                button{
+                    white-space: nowrap;
+                    margin-left: auto;
+                    align-self: center;
+                    margin-top: auto;
+                    margin-bottom: auto;
+                }
+                input{
+                    height: min-content;
+                    padding: 5px;
+                    align-self: center;
+                    min-width: 40px;
+                    margin-right: auto;
+                    width: auto;
+                }
+            }
+            .userItem{
+                display: grid;
+                grid-template-columns: 1fr 1fr 1fr 1fr;
+                padding: 20px;
+                .link{
+                    color: rgb(73, 155, 255);
+                }
+                .icons{
+                    cursor: pointer;
+                    svg{
+                        margin-right: 15px;
+                        transition: all 150ms ease-in-out;
+                    }
+                    svg:hover{
+                        color: rgb(27, 124, 250) !important;
+                    }
+                }
+                b,p{
+                    text-align: center;
+                    align-self: center;
+                }
+                .icons{
+                    display: flex;
+                    margin: auto;
+                button{
+                    border: none;
+                    background-color: transparent;
+                    padding: 0;
+                    margin: 5px;
+                    
+                }
+                }
+            }
 }
