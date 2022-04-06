@@ -34,6 +34,7 @@ $primaryClr : rgb(90, 90, 94);
                 display: grid;
                 grid-template-columns: 1fr 1fr 1fr 1fr;
                 padding: 20px;
+                border: 1px solid gray;
                 .link{
                     color: rgb(73, 155, 255);
                 }

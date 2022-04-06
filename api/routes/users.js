@@ -138,7 +138,7 @@ app.post('/order', (req, res) => {
   let danas = new Date()
   let date = danas.getFullYear() + '-' + (danas.getMonth() + 1) + '-' + danas.getDate()
 
-  
+
   let orderNumber = Date.now()
   console.log(orderNumber)
   pool.query(`SELECT userid FROM users WHERE username='${req.body.user.username}'`, async (error, firstData) => {
@@ -147,15 +147,59 @@ app.post('/order', (req, res) => {
     pool.query(`INSERT INTO orders (userID, orderNUMBER, orderDATE, shippingSTATUS) VALUES ('${firstData[0].userid}', '${orderNumber}', '${date}', 'Shipping')`, async (error, data) => {
       for (let i = 0; i < reqData.cart.length; i++) {
         for (let x = 0; x < reqData.cart[i].quantity; x++) {
-          pool.query(`INSERT INTO orderlistings (orderID, productID, orderNUMBER) VALUES (${firstData[0].userid}, ${reqData.cart[i].productid}, ${orderNumber})`, async (error, data) => {
+          pool.query(`INSERT INTO orderlistings (userID, productID, orderNUMBER) VALUES (${firstData[0].userid}, ${reqData.cart[i].productid}, ${orderNumber})`, async (error, data) => {
             console.log(orderNumber)
           })
         }
       }
     })
-    
+
     res.send()
   })
+})
+app.get('/order/:id', (req, res) => {
+  console.log('get order')
+  console.log(req.params.id)
+  pool.query(`SELECT userid FROM users WHERE username='${req.params.id}'`, async (error, paramData) => {
+    pool.query(`SELECT orderlistings.orderNUMBER, products.*, orders.orderDATE, orders.shippingSTATUS
+              FROM orderlistings
+              RIGHT JOIN products
+              ON orderlistings.productID = products.productid
+              RIGHT JOIN orders
+              ON orders.orderNUMBER = orderlistings.orderNUMBER
+              WHERE orderlistings.userid = ${paramData[0].userid}
+              `, async (error, data) => {
+      let keys = Object.values(data)
+
+      let newArr = []
+      for (let i = 0; i < keys.length; i++) {
+        if (newArr[0] == null) {
+          newArr.push(keys[i].orderNUMBER)
+        } else {
+          for (let n = 0; n < newArr.length; n++) {
+            if (newArr.includes(keys[i].orderNUMBER)) {
+            }else {
+              newArr.push(keys[i].orderNUMBER)
+            }
+          }
+        }
+      }
+      let finalArr = []
+      for (let i = 0; i < newArr.length; i++) {
+        let partOfArr = []
+        for (let n = 0; n < keys.length; n++) {
+          if (newArr[i] == keys[n].orderNUMBER) {
+            partOfArr.push(keys[n])
+          }
+        }
+        finalArr.push(partOfArr)
+
+      }
+      console.log(finalArr)
+      res.send(finalArr)
+    })
+  })
+
 })
 
 
