@@ -16,10 +16,12 @@ $primaryClr : rgb(69, 69, 75);
         width: 70%;
         min-height: 500px;
         background-color: white;
+        padding: 50px;
         .structure{
             display: grid;
-            grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+            grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
             text-align: center;
+            align-items: center;
             b, p{
                 padding: 30px;
             }
@@ -29,6 +31,18 @@ $primaryClr : rgb(69, 69, 75);
                 align-self: center;
                 margin: auto;
             }
+        }
+    }
+    .receipt{
+        text-align: center;
+        h1{
+            padding-bottom: 20px;
+        }
+        p,b{
+            padding: 10px;
+        }
+        #space{
+            margin-bottom: 50px;
         }
     }
     .exit{

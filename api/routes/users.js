@@ -137,20 +137,14 @@ app.post('/order', (req, res) => {
   let reqData = req.body
   let danas = new Date()
   let date = danas.getFullYear() + '-' + (danas.getMonth() + 1) + '-' + danas.getDate()
-
+  console.log(req.body)
 
   let orderNumber = Date.now()
-  console.log(orderNumber)
   pool.query(`SELECT userid FROM users WHERE username='${req.body.user.username}'`, async (error, firstData) => {
-
-    console.log(orderNumber)
     pool.query(`INSERT INTO orders (userID, orderNUMBER, orderDATE, shippingSTATUS) VALUES ('${firstData[0].userid}', '${orderNumber}', '${date}', 'Shipping')`, async (error, data) => {
       for (let i = 0; i < reqData.cart.length; i++) {
-        for (let x = 0; x < reqData.cart[i].quantity; x++) {
-          pool.query(`INSERT INTO orderlistings (userID, productID, orderNUMBER) VALUES (${firstData[0].userid}, ${reqData.cart[i].productid}, ${orderNumber})`, async (error, data) => {
-            console.log(orderNumber)
+          pool.query(`INSERT INTO orderlistings (userID, productID, orderNUMBER, quantity) VALUES (${firstData[0].userid}, ${reqData.cart[i].productid}, ${orderNumber},${reqData.cart[i].quantity})`, async (error, data) => {
           })
-        }
       }
     })
 
@@ -159,9 +153,8 @@ app.post('/order', (req, res) => {
 })
 app.get('/order/:id', (req, res) => {
   console.log('get order')
-  console.log(req.params.id)
   pool.query(`SELECT userid FROM users WHERE username='${req.params.id}'`, async (error, paramData) => {
-    pool.query(`SELECT orderlistings.orderNUMBER, products.*, orders.orderDATE, orders.shippingSTATUS
+    pool.query(`SELECT orderlistings.orderNUMBER, products.*, orders.orderDATE, orders.shippingSTATUS, orderlistings.quantity
               FROM orderlistings
               RIGHT JOIN products
               ON orderlistings.productID = products.productid

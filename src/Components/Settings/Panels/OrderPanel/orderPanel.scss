@@ -1,11 +1,18 @@
 $primaryClr : rgb(90, 90, 94);
-
-
 .orderPanel{
     width: 100%;
     height: 100%;
     background-color:$primaryClr;
     color: white;
+    .noOrders{
+        padding: 10%;
+        display: flex;
+        align-items: center;
+        h3{
+            margin: 0;
+            padding-left: 20px;
+        }
+    }
     p{
         padding: 50px;
         margin: 0;

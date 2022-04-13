@@ -3,6 +3,7 @@ import './orderPanel.scss'
 import { MdShoppingCart } from 'react-icons/md'
 import { HiDownload } from 'react-icons/hi'
 import Modal from './Modal/Modal'
+import { FaHistory } from 'react-icons/fa'
 
 const OrderPanel = () => {
   const [user, setUser] = useState('Guest')
@@ -34,10 +35,10 @@ const OrderPanel = () => {
   }, [user])
 
   function modalFunc(x) {
-    setModal(<Modal products={x} setModal={setModal}/>)
+    setModal(<Modal products={x} setModal={setModal} />)
   }
-  return (
-    <div className='orderPanel'>
+  if (order.length > 0) {
+    return <div className='orderPanel'>
       <div className='Show'>
         <div className='userItem'>
           <b>Order no.</b>
@@ -49,15 +50,28 @@ const OrderPanel = () => {
             <b className='link'>{e[0].orderNUMBER}</b>
             <p>{e[0].orderDATE}</p>
             <p>{e[0].shippingSTATUS}</p>
-            <p className='icons'><MdShoppingCart size={30} onClick={() => modalFunc(e)} color={'rgb(73, 155, 255)'} /><HiDownload size={30} color={'rgb(73, 155, 255)'} /></p>
+            <p className='icons'>
+              <MdShoppingCart size={30} onClick={() => modalFunc(e)} color={'rgb(73, 155, 255)'} />
+              <a href={`receipt${e[0].orderNUMBER}`} download>
+                <HiDownload size={30} color={'rgb(73, 155, 255)'} />
+              </a>
+            </p>
           </div>
+
         }
         )}
-
       </div>
       {modal}
     </div>
-  )
+  } else {
+    // If there is no order history
+    return <div className='orderPanel'>
+      <div className='noOrders'>
+        <FaHistory size={50} />
+        <h3>There are currently no order history to preview, make an order to preview it</h3>
+      </div>
+    </div>
+  }
 }
 
 export default OrderPanel
