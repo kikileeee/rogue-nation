@@ -82,7 +82,7 @@ const Home = () => {
           Website, located at roguenation.com.<br />
           By accessing this website we assume you accept these terms and conditions.<br /> Do not continue
           to use roguenation if you do not agree to take all of the terms and conditions stated on this page.</p>
-        <label htmlFor="iaccept"><b>I Agree to the Terms of changing the password</b>
+        <label htmlFor="iaccept"><b>I Agree to the Terms of changing the username</b>
           <input type="checkbox" name="" id="iaccept" onChange={() => { if (termsAgreed) { setTermsAgreed(false) } else { setTermsAgreed(true) } }} />
 
         </label>{warningTerms}
