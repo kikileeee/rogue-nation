@@ -4,6 +4,7 @@ import './productInfo.scss'
 import { useLocation } from 'react-router-dom';
 import { v4 as uuidv4 } from 'uuid'
 import Footer from '../Homepage/Footer/Footer';
+import Fader from '../Fader/Fader';
 
 
 const ProductInfo = (props) => {
@@ -14,9 +15,13 @@ const ProductInfo = (props) => {
   const [inputComment, setInputComment] = useState('')
   const [updateCommentPanel, setUpdateCommentPanel] = useState('')
   const refInput = useRef()
+  
+  const [sFader, setsFader] = useState()
 
-
-
+  let inStock = false
+  if (product.inStock > 0){
+    inStock = true
+  }
   const port = process.env.PORT || '9000'
   const ip = process.env.REACT_APP_IP || 'http://192.168.1.113:9000/'
 
@@ -60,18 +65,74 @@ const ProductInfo = (props) => {
       }))
     }
   }
+  function addToCart(){
+    console.log(product)
+
+    let a = []
+        let pushNewData = true
+        a = JSON.parse(localStorage.getItem('cart')) || [];
+        setsFader(<Fader name='Item has been added to a cart' type='success' />)
+
+        let total = 1
+        let cart = a.map(e => {
+            total += e.quantity
+        })
+
+        a.find(item => {
+            if (item.productid == product.productid) {
+                item.quantity += 1
+                pushNewData = false
+                props.setCartNumber(`${total}`)
+                localStorage.setItem('cart', JSON.stringify(a))
+            }
+        })
+        if (pushNewData) {
+            product.quantity = 1
+            a.push(product);
+            props.setCartNumber(`${total}`)
+            localStorage.setItem('cart', JSON.stringify(a))
+        }
+  }
   return (
     <>
       <Navbar cartNumber={props.cartNumber} setCartNumber={props.setCartNumber} />
       <div className='productInfo'>
 
         <div className='product'>
+          <div>
           <h1>{product.productName}</h1>
-          <h2>Current price: {product.productPrice}</h2>
+          <h2>Current price: {product.productPrice}$</h2>
           <img src={require(`../Homepage/ProductShowcase/images/${product.productImage}`)} alt="" />
-          <h4>There is curently {product.inStock} of this product in invetory</h4>
+          </div>
+          <table>
+            <tbody>
+            <tr>
+              <th>Product Name</th>
+              <td>{product.productName}</td>
+              </tr>
+              <tr>
+              <th>Product price</th>
+              <td>{product.productPrice}$</td>
+            </tr>
+            <tr>
+              <th>Gender</th>
+              <td>{product.gender}</td>
+            </tr>
+            <tr>
+              <th>Brand</th>
+              <td>{product.brand}</td>
+            </tr>
+            <tr>
+              <th>Inventory</th>
+              <td>{inStock ? 'In Stock' : 'Not In Stock'}</td>
+            </tr>
+            </tbody>
+          </table>
         </div>
       </div>
+      {sFader}
+      <button className='addToCart' onClick={addToCart}>ADD TO CART</button>
+      <hr />
       <div className='comments'>
         <div className='inputButton'>
           <input type="text" onChange={e => { setInputComment(e.target.value) }} ref={refInput}/>
