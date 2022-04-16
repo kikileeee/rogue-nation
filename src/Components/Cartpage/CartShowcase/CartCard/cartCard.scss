@@ -55,12 +55,22 @@
 }
 @media only screen and (max-width: 750px) {
     .cartCard{
+        transform: scale(0.85);
         .items{
             margin: 0;
+            .name{
+                width: 15%;
+            }
+            .price{
+                text-align: center;
+                width: 40px;
+            }
             .quantity{
                 margin-right: 5px;
+                flex-direction: column;
                 button{
-                    padding: 15px;
+                    padding: 10px;
+                    margin: 0;
                 }
             }
         }

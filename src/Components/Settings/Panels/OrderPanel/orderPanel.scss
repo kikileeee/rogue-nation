@@ -4,6 +4,7 @@ $primaryClr : rgb(90, 90, 94);
     height: 100%;
     background-color:$primaryClr;
     color: white;
+    min-height: fit-content;
     .noOrders{
         padding: 10%;
         display: flex;
@@ -17,7 +18,6 @@ $primaryClr : rgb(90, 90, 94);
         padding: 50px;
         margin: 0;
     }
-            min-height: 50vh;
             .fdisplay{
                 display: flex;
                 padding: 20px;
@@ -29,7 +29,6 @@ $primaryClr : rgb(90, 90, 94);
                     margin-bottom: auto;
                 }
                 input{
-                    height: min-content;
                     padding: 5px;
                     align-self: center;
                     min-width: 40px;
@@ -71,4 +70,22 @@ $primaryClr : rgb(90, 90, 94);
                 }
                 }
             }
+
+}
+@media only screen and (max-width: 730px) {
+    .orderPanel{
+        font-size: small;
+        .userItem{
+            padding: 3%;
+            p{
+                padding: 3%;
+            }
+        }
+    }
+}
+@media only screen and (max-width: 400px){
+    .orderPanel{
+        font-size: xx-small;
+        min-height: fit-content;
+    }
 }

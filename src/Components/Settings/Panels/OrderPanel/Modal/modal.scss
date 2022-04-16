@@ -17,6 +17,7 @@ $primaryClr : rgb(69, 69, 75);
         min-height: 500px;
         background-color: white;
         padding: 50px;
+
         .structure{
             display: grid;
             grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
@@ -26,6 +27,7 @@ $primaryClr : rgb(69, 69, 75);
                 padding: 30px;
             }
             img{
+                min-width: 50px;
                 width: 60%;
                 height: auto;
                 align-self: center;
@@ -64,4 +66,23 @@ $primaryClr : rgb(69, 69, 75);
     .exit:hover{
         font-size: xx-large;
     }
+}
+@media only screen and (max-width: 1050px){
+    .modal{
+        .table{
+            min-width: 200px;
+            width: 100% !important;
+            margin: 0 !important;
+            
+            margin-top: 50px !important;
+            padding: 0 !important;
+            font-size: xx-small !important;
+            .structure{
+                b,p{
+                    padding: 3% !important;
+                }
+            }
+        }
+    }
+    
 }

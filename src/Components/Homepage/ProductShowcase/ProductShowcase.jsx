@@ -4,7 +4,7 @@ import { v4 as uuidv4 } from 'uuid'
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCartSharp';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
-import {FcDeleteDatabase} from 'react-icons/fc'
+import { FcDeleteDatabase } from 'react-icons/fc'
 import { useNavigate } from 'react-router-dom'
 import Fader from '../../Fader/Fader'
 
@@ -24,8 +24,8 @@ const ProductShowcase = (props) => {
             headers: { 'Content-Type': 'application/json' }
         }).then(response => response.json().then(data => {
             SetProducts(data)
-            if (data.length > 0){
-                 setIsItFetched(true)
+            if (data.length > 0) {
+                setIsItFetched(true)
             }
         }))
     }, [])
@@ -103,9 +103,9 @@ const ProductShowcase = (props) => {
 
     if (!isItFetched) {
         return <div className='productShowcaseWrapperError'>
-            <FcDeleteDatabase size={100}/>
+            <FcDeleteDatabase size={100} />
             <h2>Database didn't load, wait a few second and then reload</h2>
-            </div>
+        </div>
     } else {
         return (
             <div className='productShowcaseWrapper'>
@@ -121,7 +121,7 @@ const ProductShowcase = (props) => {
                                 <div className='card' key={uuidv4()}>
                                     <h2>{product.productName}</h2>
                                     {sales(product)}
-                                    <h4 onClick={() => { navigate(`/productInfo`, { state: { product: product } }) }}>Click for more info</h4>
+                                    <h4 onClick={() => { navigate(`/productInfo`, { state: { product: product, sale: saleInfo } }) }}>Click for more info</h4>
                                     <img src={require(`../ProductShowcase/images/${product.productImage}`)} alt="" />
                                     <div className='blackOverlay'>
                                         <button onClick={() => { addItem(product) }}><AddShoppingCartIcon /></button>

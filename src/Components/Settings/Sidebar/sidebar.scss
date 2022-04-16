@@ -52,3 +52,9 @@ $primaryClr : rgb(69, 69, 75);
     }
     
 }
+@media only screen and (max-width: 730px) {
+.sidebar{
+    max-width: 100%;
+    width: 100%;
+}
+}

@@ -6,6 +6,7 @@ $primaryClr : rgb(90, 90, 94);
     height: 100%;
     background-color:$primaryClr;
     color: white;
+    padding-bottom: 40px;
     .warning{
         color: rgb(255, 173, 173);
         font-size: large;
@@ -43,7 +44,6 @@ $primaryClr : rgb(90, 90, 94);
         font-size: large;
         padding: 15px;
         margin: auto;
-        margin-bottom: 30px;
         margin-top: 30px;
         color: white;
         background-color: rgb(255, 119, 0);
@@ -54,5 +54,11 @@ $primaryClr : rgb(90, 90, 94);
     .change:hover{
         background-color: rgb(255, 151, 60);
 
+    }
+}
+@media only screen and (max-width: 700px){
+    .terms{
+        width: 80%;
+        padding: 5% !important;
     }
 }

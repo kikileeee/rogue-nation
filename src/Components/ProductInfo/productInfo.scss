@@ -3,11 +3,27 @@ $primaryClr : rgb(69, 69, 75);
 display: flex;
 width: 100%;
 text-align: center;
+position: relative;
 
     .product{
         width: 100%;
         display: flex;
         margin-top: 50px;
+        .onSale{
+            background-color: rgb(255, 81, 0);
+            color: white;
+            font-weight: 550;
+            font-size: x-large;
+            writing-mode: vertical-rl;
+            text-orientation: upright;
+            min-height: 150px;
+            padding: 20px;
+            position: absolute;
+            top: 0;
+            left: 0;
+            border-bottom-left-radius: 7px;
+            border-bottom-right-radius: 7px;
+        }
         table{
             margin: auto;
             margin-bottom: 50px;
@@ -19,6 +35,10 @@ text-align: center;
         }
         h2{
             color: green;
+            
+            s{
+                margin-left: 20px;
+            }
         }
         img{
             width: 25%;
@@ -28,6 +48,11 @@ text-align: center;
     @media only screen and (max-width: 750px) {
         .product{
             flex-direction: column;
+            .onSale{
+                font-size: large;
+                padding: 10px;
+                min-height: 100px;
+            }
         }
     }
 
