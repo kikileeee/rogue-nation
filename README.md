@@ -1,7 +1,7 @@
 
           /////     Im still working on this site    //////
 
-Page is currently active on this link : https://my-eh6reh2ll-kikileeee.vercel.app/settings   // Version - 16/4/2022
+Page is currently active on this link : https://my-eh6reh2ll-kikileeee.vercel.app   // Version - 16/4/2022
 
  // Site is done about 90% //
 
