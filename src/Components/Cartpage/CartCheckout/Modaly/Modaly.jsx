@@ -12,7 +12,7 @@ const Modaly = (props) => {
   const ownerInput = useRef()
   
   const port = process.env.PORT || '9000'
-  const ip = process.env.REACT_APP_IP || 'http://192.168.1.113:9000/'
+  const ip = process.env.REACT_APP_IP || 'https://api-react-stop.herokuapp.com/'
 
   function next() {
     setStep(step + 1)

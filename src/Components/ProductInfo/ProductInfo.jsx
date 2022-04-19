@@ -25,7 +25,7 @@ const ProductInfo = (props) => {
     inStock = true
   }
   const port = process.env.PORT || '9000'
-  const ip = process.env.REACT_APP_IP || 'http://192.168.1.113:9000/'
+  const ip = process.env.REACT_APP_IP || 'https://api-react-stop.herokuapp.com/'
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -39,9 +39,7 @@ const ProductInfo = (props) => {
       body: JSON.stringify(product),
       headers: { 'Content-Type': 'application/json' }
     }).then(response => response.json().then(data => {
-      if (data.length) {
         setComments(data)
-      }
     }))
   }, [updateCommentPanel])
 
@@ -63,10 +61,9 @@ const ProductInfo = (props) => {
         body: JSON.stringify(dataComment),
         headers: { 'Content-Type': 'application/json' }
       }).then(response => response.json().then(data => {
-        if (data.length) {
+        console.log(data)
+        refInput.current.value = ''
           setComments(data)
-          refInput.current.value = ''
-        }
       }))
     }
   }

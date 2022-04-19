@@ -4,6 +4,7 @@ const { createPool } = require('mysql');
 
 
 //  https://console.clever-cloud.com/users/me/addons
+
 const pool = createPool({
   host: "localhost",
   user: "root",
@@ -14,6 +15,7 @@ const pool = createPool({
 
 app.get('/popular', function (req, res, next) {
   pool.query(`SELECT * FROM products`, (error, data) => {
+    console.log(data)
     res.send(data)
   })
 });

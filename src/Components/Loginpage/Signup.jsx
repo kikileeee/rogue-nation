@@ -24,7 +24,7 @@ const Login = () => {
     confirmPassword: confirmPassword
   }
   const port = process.env.PORT || '9000'
-  const ip = process.env.REACT_APP_IP || 'http://192.168.1.113:9000/'
+  const ip = process.env.REACT_APP_IP || 'https://api-react-stop.herokuapp.com/'
   function sendData() {
     fetch(`${ip}users`, {
       method: 'POST',
@@ -90,7 +90,7 @@ const Login = () => {
       <input type="email" placeholder="Email address" onChange={e => setEmail(e.target.value)}></input>
       <p className={refEmail}>Email address must be valid</p>
       <input type="password" placeholder="Password" onChange={e => setPassword(e.target.value)}></input>
-      <p className={refPassword}>Password must have atleast 6 Characters</p>
+      <p className={refPassword}>Password must have atleast 7 Characters</p>
       <input type="password" placeholder="Confirm Password" onChange={e => setconfirmPassword(e.target.value)}></input>
       <p className={refPasswordSame}>Passwords must be the same</p>
       <button onClick={sendData}>Sign up</button>

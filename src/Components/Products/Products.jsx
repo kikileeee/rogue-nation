@@ -48,7 +48,7 @@ const Products = (props) => {
 
     let count = -1
     const port = process.env.PORT || '9000'
-    const ip = process.env.REACT_APP_IP || 'http://192.168.1.113:9000/'
+    const ip = process.env.REACT_APP_IP || 'https://api-react-stop.herokuapp.com/'
 
 
     function handleOnChange(index) {
@@ -66,7 +66,7 @@ const Products = (props) => {
             <h2>{x.productName}</h2>
             {sales(x)}
             <h5>For: {x.gender}</h5>
-            <h4 onClick={() => { navigate(`/productInfo`, { state: { product: x } }) }}>Click for more info</h4>
+            <h4 onClick={() => { navigate(`/productInfo`, { state: { product: x, sale:saleInfo } }) }}>Click for more info</h4>
             <img src={require(`../Homepage/ProductShowcase/images/${x.productImage}`)} alt="" />
             <div className='blackOverlay'>
                 <button onClick={() => { addItem(x) }}><AddShoppingCartIcon /></button>

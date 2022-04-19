@@ -2,8 +2,9 @@ const express = require('express');
 const app = express.Router();
 const { createPool } = require('mysql');
 const bcrypt = require('bcryptjs')
-
+// sss
 //  https://console.clever-cloud.com/users/me/addons
+
 const pool = createPool({
   host: "localhost",
   user: "root",
@@ -67,7 +68,6 @@ app.post('/', (req, res) => {
 })
 app.post('/login', (req, res) => {
   pool.query(`SELECT * FROM users`, async (error, data) => {
-    console.log(req.body)
     let keys = Object.values(data)
     let username = req.body.username
     let password = req.body.password
@@ -143,8 +143,8 @@ app.post('/order', (req, res) => {
   pool.query(`SELECT userid FROM users WHERE username='${req.body.user.username}'`, async (error, firstData) => {
     pool.query(`INSERT INTO orders (userID, orderNUMBER, orderDATE, shippingSTATUS) VALUES ('${firstData[0].userid}', '${orderNumber}', '${date}', 'Shipping')`, async (error, data) => {
       for (let i = 0; i < reqData.cart.length; i++) {
-          pool.query(`INSERT INTO orderlistings (userID, productID, orderNUMBER, quantity) VALUES (${firstData[0].userid}, ${reqData.cart[i].productid}, ${orderNumber},${reqData.cart[i].quantity})`, async (error, data) => {
-          })
+        pool.query(`INSERT INTO orderlistings (userID, productID, orderNUMBER, quantity) VALUES (${firstData[0].userid}, ${reqData.cart[i].productid}, ${orderNumber},${reqData.cart[i].quantity})`, async (error, data) => {
+        })
       }
     })
 
@@ -162,34 +162,40 @@ app.get('/order/:id', (req, res) => {
               ON orders.orderNUMBER = orderlistings.orderNUMBER
               WHERE orderlistings.userid = ${paramData[0].userid}
               `, async (error, data) => {
-      let keys = Object.values(data)
+      if (data == undefined) {
+        console.log('data is undefined')
+        res.send([])
+      } else {
+        let keys = Object.values(data)
 
-      let newArr = []
-      for (let i = 0; i < keys.length; i++) {
-        if (newArr[0] == null) {
-          newArr.push(keys[i].orderNUMBER)
-        } else {
-          for (let n = 0; n < newArr.length; n++) {
-            if (newArr.includes(keys[i].orderNUMBER)) {
-            }else {
-              newArr.push(keys[i].orderNUMBER)
+        let newArr = []
+        for (let i = 0; i < keys.length; i++) {
+          if (newArr[0] == null) {
+            newArr.push(keys[i].orderNUMBER)
+          } else {
+            for (let n = 0; n < newArr.length; n++) {
+              if (newArr.includes(keys[i].orderNUMBER)) {
+              } else {
+                newArr.push(keys[i].orderNUMBER)
+              }
             }
           }
         }
-      }
-      let finalArr = []
-      for (let i = 0; i < newArr.length; i++) {
-        let partOfArr = []
-        for (let n = 0; n < keys.length; n++) {
-          if (newArr[i] == keys[n].orderNUMBER) {
-            partOfArr.push(keys[n])
+        let finalArr = []
+        for (let i = 0; i < newArr.length; i++) {
+          let partOfArr = []
+          for (let n = 0; n < keys.length; n++) {
+            if (newArr[i] == keys[n].orderNUMBER) {
+              partOfArr.push(keys[n])
+            }
           }
-        }
-        finalArr.push(partOfArr)
+          finalArr.push(partOfArr)
 
+        }
+        console.log(finalArr)
+        res.send(finalArr)
       }
-      console.log(finalArr)
-      res.send(finalArr)
+
     })
   })
 

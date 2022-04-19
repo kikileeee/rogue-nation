@@ -5,7 +5,7 @@ import './home.scss'
 const Home = () => {
 
   const port = process.env.PORT || '9000'
-  const ip = process.env.REACT_APP_IP || 'http://192.168.1.113:9000/'
+  const ip = process.env.REACT_APP_IP || 'https://api-react-stop.herokuapp.com/'
 
 
   const [user, setUser] = useState('Guest')
